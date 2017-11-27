@@ -54,6 +54,8 @@
     "gulp-uglify": "^3.0.0",
     "harmony": "0.0.1",
     "merge-stream": "^1.0.1",
+    "mongojs": "^2.4.1",
+    "pdfkit": "^0.8.3",
     "run-sequence": "^2.2.0",
     "rxjs": "5.0.1",
     "systemjs": "0.19.40",
