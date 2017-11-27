@@ -1,0 +1,23 @@
+{ 
+    "REQ_TITLE" : "Project/Initiative title. Brief but differentiating title that the request will be known as.",
+    "AMOUNT_SPEND" : "Please complete this box first as this will ensure the ERF only shows relevant fields that need to be completed based on the value of your request.",
+    "DIVISION" : "Select the CIO Division that owns the affected system",
+    "BU" : "Select the business unit that owns the affected system",
+    "HOS" : "Where available, this will be generated via the Division & Business Unit. Otherwise enter the name of the Head of system/Function and is a direct report of a Director.<br/><strong>NOTE:</strong> Once this is overwritten you will have to manually update.",
+    "REQ_EMAIL" : "This must be a full email address, e.g. joe.bloggs@lloydstsb.co.uk as opposed to Bloggs, Joe",
+    "CIO_ENGAGED" : "Please identify the level B HoS approver engaged on this spend (please overwrite with the appropriate Level B approver as oer the DA list if this is not the named HoS on the submission)<br/><strong>NOTE:</strong> DA list link given above",
+    "TAG_PRESENT" : "Presenters at Gate meetings must have the relevant Delegation of Authority limits, a Head of System may present on behalf of an OC member for spend greater than £1M",
+    "TAG_PRESENT_EMAIL" : "This will be used for the meeting invite",
+    "COST_FORUM_PRES" : "CIO request will be covered by relevant Head of System/Function",
+    "GCMC_PRES" : "(Previously known as 'Cost Board Presenter') CIO requests will be covered by relevant Head of System/Function",
+    "PROD_SERV_DESC" : "Must clearly show what product or service is being purchased, start and end dates, the quantity and the cost. At least one product/service description MUST be entered. Use the buttons on the right to add or remove lines as necessary.",
+    "VAT" : "VAT% must be stated and should be based at 20%, if a different VAT rate is being used please make this explicitly clear in the Financial Summary field",
+    "SPEND_AMOUNT" : "The Total inc VAT will automatically calculate based on the product / service lines plus the amount specified in the VAT field",
+    "SOURCE_ENG" : "Enter your contact in Group Sourcing who has been involved in this request (IT Sourcing)",
+    "SPEND_TYPE" : "Select from list depending on majority of spend: <br/><strong>Hardware</strong> - Physical kit<br/><strong>Software</strong> - Licenses and data services<br/><strong>Networks</strong>Line rental and networking tariff agreements<br/><strong>IT Services - </strong><br/><ul style='list-style-type:decimal;'><li>All fixed price deals (onshore and offshore)</li><li>All IT Maintenance based contracts that include resources</li><li>All Managed Services</li><li>Proprietary Hardware/Software Support</li></ul><br/><strong>Resource Augmentation</strong> - Time and Materials contract with no fixed deliverables (please refer to FAQ for details)",
+    "PRICING_TERMS" : "Please select the pricing arrangements for this request. If Resource Augmentation, should only use variable (T&M)",
+    "BUY_ONLINE" : "Please select the supplier as on Buying Online, Select the first initial of the supplier to filter the list, then select from the drop down box. <br/>If supplier is not on Buying online, set initial box to - and select 'Not on Buying Online - manual invoice payment required'. This will automatically be challenged at CMU.<br/><strong>NOTE:</strong> For Spend Type 'IT Offshore Services' the initial need not be selected as it will show ITO specific suppliers in the",
+    "MANUFACTURER" : "<strong>If vendor is same as 'Buying Online Supplier' then please enter 'N/A'</strong><br> This should be the supplier that provides the actual hardware/software/service conerned (e.g. Dell for Laptops)",
+    "FINANCE_ENG" : "Your local business unit finance contact, who can sign off on the budget status of this request<br/> For RTB - This is your Finance Business Partner <br/> For CTB - A person who can provide sufficient evidence that there is funcding.",
+    "GL_CODE" : "Enter the General Ledger (GL) Code for this spend. See the CMU07 Interchange page for a list of CMU07 GL codes (link provided to the left)"
+   }

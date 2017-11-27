@@ -1,0 +1,56 @@
+ <!-- Sidebar -->
+        <div *ngIf='showSideBar' id="sidebar-wrapper">
+            <ul class="sidebar-nav" id="menu">
+
+                 <li *ngFor='let sitem of sidemenu'>
+                     <a class="page-scroll" [routerLink]="sitem.link"><i class="{{sitem.icon}}"></i>&nbsp;&nbsp;{{sitem.display}}</a>
+            <!--<a class="page-scroll"  [routerLink]="sitem.link"><i class="{{sitem.icon}}"></i>{{sitem.display}}</a>-->
+        </li>
+
+                <!--<li class="active">
+                    <a href="http://seegatesite.com/bootstrap/simple_sidebar_menu.html#"><span class="fa-stack fa-lg pull-left"><i class="fa fa-dashboard fa-stack-1x "></i></span> Dashboard</a>
+                    <ul class="nav-pills nav-stacked" style="list-style-type: none; display: none;">
+                        <li><a href="http://seegatesite.com/bootstrap/simple_sidebar_menu.html#">link1</a></li>
+                        <li><a href="http://seegatesite.com/bootstrap/simple_sidebar_menu.html#">link2</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="http://seegatesite.com/bootstrap/simple_sidebar_menu.html#"><span class="fa-stack fa-lg pull-left"><i class="fa fa-flag fa-stack-1x "></i></span> Shortcut</a>
+                    <ul class="nav-pills nav-stacked" style="list-style-type: none; display: none;">
+                        <li><a href="http://seegatesite.com/bootstrap/simple_sidebar_menu.html#"><span class="fa-stack fa-lg pull-left"><i class="fa fa-flag fa-stack-1x "></i></span>link1</a></li>
+                        <li><a href="http://seegatesite.com/bootstrap/simple_sidebar_menu.html#"><span class="fa-stack fa-lg pull-left"><i class="fa fa-flag fa-stack-1x "></i></span>link2</a></li>
+
+                    </ul>
+                </li>
+                <li>
+                    <a href="http://seegatesite.com/bootstrap/simple_sidebar_menu.html#"><span class="fa-stack fa-lg pull-left"><i class="fa fa-cloud-download fa-stack-1x "></i></span>Overview</a>
+                </li>
+                <li>
+                    <a href="http://seegatesite.com/bootstrap/simple_sidebar_menu.html#"> <span class="fa-stack fa-lg pull-left"><i class="fa fa-cart-plus fa-stack-1x "></i></span>Events</a>
+                </li>
+                <li>
+                    <a href="http://seegatesite.com/bootstrap/simple_sidebar_menu.html#"><span class="fa-stack fa-lg pull-left"><i class="fa fa-youtube-play fa-stack-1x "></i></span>About</a>
+                </li>
+                <li>
+                    <a href="http://seegatesite.com/bootstrap/simple_sidebar_menu.html#"><span class="fa-stack fa-lg pull-left"><i class="fa fa-wrench fa-stack-1x "></i></span>Services</a>
+                </li>
+                <li>
+                    <a href="http://seegatesite.com/bootstrap/simple_sidebar_menu.html#"><span class="fa-stack fa-lg pull-left"><i class="fa fa-server fa-stack-1x "></i></span>Contact</a>
+                </li>-->
+            </ul>
+        </div>
+        <!-- /#sidebar-wrapper -->
+
+<!--<div class="container">
+<nav class="navbar navbar-inverse">
+                <ul class="nav navbar-nav">
+
+                     <li *ngFor='let sitem of sidemenu'>
+            <a class="page-scroll"  [routerLink]="sitem.link">{{sitem.display}}</a>
+        </li>
+                    
+                </ul>
+</nav>
+</div>    -->
+
+             

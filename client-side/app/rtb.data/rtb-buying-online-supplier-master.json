@@ -1,0 +1,7 @@
+{
+    "BuyingOnlineSuppliers":[
+        {"Id":"Microsoft","Name":"Microsoft"},
+        {"Id":"Oracle","Name":"Oracle"},
+        {"Id":"SAP","Name":"SAP"}             
+    ]
+}

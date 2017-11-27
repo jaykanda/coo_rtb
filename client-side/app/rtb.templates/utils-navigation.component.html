@@ -1,0 +1,108 @@
+<nav class="navbar navbar-default no-margin navbar-fixed-top">
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <div class="navbar-header col-sm-1">
+                <button (click)='showSideBarButtonClick();' type="button" class="btn btn-default" aria-label="Left Align">
+                    <span class="glyphicon glyphicon-menu-hamburger" aria-hidden="true"></span>
+                </button>
+                </div>
+                <div class="col-sm-2">
+                  <a href="#" aria-label="Left Align" class="btn home" type="button">
+                    <span class="glyphicon glyphicon-home" aria-hidden="true"></span>
+                      &nbsp;&nbsp;IT Spend RTB Request : Requestor
+                  </a>
+                </div>
+ <!--<ul class="nav navbar-nav">
+        <li *ngFor='let item of menu'>
+            <a class="page-scroll"  [routerLink]="item.link">{{item.display}}</a>
+        </li>
+     </ul>-->
+       <div class="navbar-header text-center col-sm-6">
+              <a class="" href="#"><img src="../image/logo.png"/></a>
+       </div>
+       <div class="col-sm-3">
+          <ul class="nav navbar-nav navbar-right">
+          <li class="dropdown" *ngFor='let item of usermenu'>
+                    <a href="javascript:void(0)" class="dropdown-toggle" data-toggle="dropdown"><img class="img-circle" src="../image/profile_pic.png"/> Julia Smith </a>
+                    <ul class="dropdown-menu">
+                        <li *ngFor='let subitem of item.submenu'>
+                            <a [routerLink]="subitem.link"><<i class="{{subitem.icon}}"></i>> {{subitem.display}}</a>
+                        </li>
+                        <!--<li>
+                            <a href="#"><i class="fa fa-fw fa-envelope"></i> Inbox</a>
+                        </li>
+                        <li>
+                            <a href="#"><i class="fa fa-fw fa-gear"></i> Settings</a>
+                        </li>
+                        <li class="divider"></li>
+                        <li>
+                            <a href="#"><i class="fa fa-fw fa-power-off"></i> Log Out</a>
+                        </li>-->
+                    </ul>
+                </li>
+                <li class="dropdown notificationBar" *ngFor='let item of alertmenu'>
+                    <a [routerLink]="item.link" class="dropdown-toggle" data-toggle="dropdown"><i class="pull-left {{item.icon}}"></i><div class="pull-left notification-circle text-center">4</div></a>
+                    
+                          <div class="list-group dropdown-menu alert-dropdown">
+                                <a href="#" class="list-group-item active text-center">
+Notification                                      </a>
+                                <a href="#" class="list-group-item">Dapibus ac facilisis in</a>
+                                <a href="#" class="list-group-item">Morbi leo risus</a>
+                                <a href="#" class="list-group-item">Porta ac consectetur ac</a>
+                                <a href="#" class="list-group-item">Vestibulum at eros</a>
+                              </div>
+                   <!-- <ul class="dropdown-menu alert-dropdown">
+                        
+                        <li *ngFor='let subitem of item.submenu'>
+                            <a [routerLink]="subitem.link"><span class="{{subitem.icon}}">{{subitem.display}}....</span></a>
+                        </li>-->
+                        
+                        
+                        <!--<li>
+                            <a href="#">Cretical<span class="label label-danger">Cretical</span></a>
+                        </li>-->
+                        <!--<li class="divider"></li>-->
+                        
+                     <!--</ul>-->
+                </li>
+
+
+       <!--<li><a routerLink="/signup"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
+       <li><a routerLink="/login"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>-->
+     </ul></div>
+
+            <!--<ul class="nav navbar-nav">
+                <li class="active">
+                    <button class="navbar-toggle collapse in" data-toggle="collapse" id="menu-toggle-2"> 
+                        <span class="glyphicon glyphicon-th-large" aria-hidden="true"></span>
+                    </button>
+                </li>
+                <li>
+                    <input type="text" class="form-control input-group" placeholder="Search here..." />
+                </li>
+                <li>&nbsp;</li>
+                <li>
+                    <button class="navbar-toggle collapse in" data-toggle="collapse" id="menu-toggle-2"> 
+                        <span class="glyphicon glyphicon-th-large" aria-hidden="true"></span>
+                    </button>
+                </li>
+            </ul>-->
+        </div>
+        <!-- bs-example-navbar-collapse-1 -->
+    </nav>
+
+<!--<div class="container">
+<nav class="navbar navbar-inverse">
+     
+     <ul class="nav navbar-nav">
+        <li *ngFor='let item of menu'>
+            <a class="page-scroll"  [routerLink]="item.link">{{item.display}}</a>
+        </li>
+     </ul>
+     <ul class="nav navbar-nav navbar-right">
+       <li><a routerLink="/signup"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
+       <li><a routerLink="/login"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+     </ul>
+  
+</nav>
+</div>-->
+

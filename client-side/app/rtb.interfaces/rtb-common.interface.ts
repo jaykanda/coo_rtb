@@ -1,0 +1,70 @@
+export interface IRESTServiceCall {
+    restServiceCall:(url:string,method:string,data:string,id:string)=>any;   
+}
+export interface IFinancialInformation {
+    Year:number;
+    Budget:number;
+    Forecast:number;
+    Threat:number;
+    Opportunity:number;
+}
+export interface IItem {
+    Description:string;
+    Category:any;
+    StartDate:string;
+    EndDate:string;
+    Costs:number;
+    Vat:number;
+}
+export interface IRTBSpendRequest {
+        RequestID:string;
+        RequestTitle:string;
+        AmountToSpend:any;
+        Division:any;
+        BusinessUnit:any;
+        HeadOfSystem:any;
+        Requestor:any;
+        AMIPartnerEngaged:any;
+        TechnologyAcquisitionGatePresenter:any;
+        CIOContactEngaged:any;        
+        TACPresenter:any;  
+        GCMCPresenter:any;
+        CostForumPresenter:any;      
+        ItemDetails:IItem[];
+        Vat:number;
+        TotalVatAmount:number;
+        TotalSpendAmount:number;
+        ItemQuestion1:string;
+        ItemQuestion2:string;
+        ItemQuestion3:string;
+        ItemQuestion4:string;
+        ItemQuestion5:string;
+        SourcingContactEngaged:any;
+        SpendType:any;
+        PricingTerms:any;
+        BuyingOnlineSupplier:any;
+        Manufacturer:string;
+        AMC:string;
+        RPIQuestion:string;
+        LBGQuestion:string;
+        TierAQuestion:string;
+        FinanceContactEngaged:any;
+        Project:any;
+        ProgrammeTitle:string;
+        BudgetType:string;
+        BudgetSubtype:string;
+        CostCentre:number;
+        PRN:string;
+        SpendGLCode:number;
+        WBSValidationCheck:string;
+        IsDivestmentProgramme:string;
+        Area:any;
+        AreaHeadOfSystem:any;
+        FinancialInformation:IFinancialInformation[];
+        FinancialSummary:string;
+        FinanceQuestion1:string;
+        FinanceQuestion2:string;
+        FinanceQuestion3:string;
+        FinanceQuestion4:string;
+        FinanceQuestion5:string;
+}

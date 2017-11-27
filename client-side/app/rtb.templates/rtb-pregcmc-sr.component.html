@@ -1,0 +1,958 @@
+<div id="page-content-wrapper">
+        <div class="container-fluid">
+            
+            <!--<div class="row">&nbsp;</div>-->
+            <div class="row">
+                  <div class="col-lg-4">
+    
+                    <nav class="breadcrumb">
+                <a class="breadcrumb-item" href="/">Home</a>
+                <a class="breadcrumb-item" href="/spendingrequests">Spending Request</a>
+                <a class="breadcrumb-item active" href="#">New</a>
+        
+              </nav>
+                  </div>
+                <div class="col-lg-8">
+                    <h3 *ngIf='newRequestFlag' class="page-header">
+                                Request #1 inital Draw
+                            </h3>
+                    <h3 *ngIf='!newRequestFlag' class="page-header">
+                                Review and confirm your request
+                            </h3>
+                </div>
+            </div>
+            <form [formGroup]="newSRForm" noinvalidate (ngSubmit)="newSRForm.value">
+            <div class="row">
+                <div class="col-lg-9">
+                    <div class="panel panel-primary">
+                        <div class="panel-heading">
+                            <div class="panel-title">About the spend request</div>
+                        </div>
+                        <div class="panel-body">
+                            <div class="col-lg-5">
+                                <div class="form-group">
+                                    <label>Request Title</label>
+                                    <span class="tool-tip-holder" *ngIf='newRequestFlag' tooltip content="REQ_TITLE"  onClick="true">i</span>
+                                    <input [(ngModel)]="RTBSpendRequest.RequestTitle" type="text" *ngIf='newRequestFlag' class="form-control" [ngClass]="displayFieldCss('reqTitle')" formControlName="reqTitle">
+                                    <span class="errorTxt" *ngIf="isFieldValid('reqTitle')">
+                                        * Required field with no special characters
+                                    </span>                                
+                                    <p *ngIf='!newRequestFlag'>{{RTBSpendRequest.RequestTitle}}</p>
+                                </div>
+                            </div>
+                            <div class="col-lg-5">
+                                <div class="form-group">
+                                    <label for="exampleInputEmail1">Amount to spend</label>
+                                    <span class="tool-tip-holder" *ngIf='newRequestFlag' tooltip content='AMOUNT_SPEND' onClick="true">i</span>
+                                    <select (change)="onChangeFields()" [(ngModel)]="RTBSpendRequest.AmountToSpend" *ngIf='newRequestFlag' class="form-control" [ngClass]="displayFieldCss('amountSpend')"  formControlName="amountSpend">
+                                       <option *ngFor="let obj of AmountSpendList" [ngValue]="obj">
+                                          {{obj.Name}}
+                                       </option>
+                                    </select>                                
+                                    <span class="errorTxt" *ngIf="isFieldValid('amountSpend')">
+                                         * Required field
+                                    </span>
+                                    <p *ngIf='!newRequestFlag'>{{RTBSpendRequest.AmountToSpend.Name}}</p>
+                                </div>
+                            </div>
+                            <div class="col-lg-12 divider" role="separator"></div>
+                            <div class="col-lg-12">
+                                <p>Divisional CIO Sponsor
+                                    <br/>
+                                    <br/>CIO Sponsor is the area requesting the change, product or service and are accountable for the request.</p>
+                            </div>
+                            <div class="col-lg-4">
+                                <div class="form-group">
+                                    <label>Division</label>
+                                    <span class="tool-tip-holder" *ngIf='newRequestFlag' tooltip content='DIVISION' onClick="true">i</span>
+                                    <select [(ngModel)]="RTBSpendRequest.Division" class="form-control" *ngIf='newRequestFlag' (change)="setBusinessUnit();" [ngClass]="displayFieldCss('cioDivision')" formControlName="amountSpend">
+                                           <option *ngFor="let obj of DivisionList"  [ngValue]="obj">
+                                              {{obj.Name}}
+                                           </option>
+                                        </select>
+                                    <span class="errorTxt" *ngIf="isFieldValid('cioDivision')">
+                                         * Required field
+                                    </span>
+                                    <p *ngIf='!newRequestFlag'>{{RTBSpendRequest.Division.Name}}</p>
+                                </div>
+                            </div>
+                            <div class="col-lg-4">
+                                <div class="form-group">
+                                    <label>Business Unit</label>
+                                    <span class="tool-tip-holder" *ngIf='newRequestFlag' tooltip content='BU' onClick="true">i</span>
+                                    <select [(ngModel)]="RTBSpendRequest.BusinessUnit" *ngIf='newRequestFlag' class="form-control" [ngClass]="displayFieldCss('cioBU')" (change)="setHeadOfSystem();" [ngClass]="displayFieldCss('amountSpend')"  formControlName="amountSpend">
+                                           <option *ngFor="let obj of BusinessUnitList" [ngValue]="obj">
+                                              {{obj.Name}}
+                                           </option>
+                                        </select>
+                                    <span class="errorTxt" *ngIf="isFieldValid('cioBU')">
+                                        * Required field
+                                    </span>
+                                    <p *ngIf='!newRequestFlag'>{{RTBSpendRequest.BusinessUnit.Name}}</p>
+                                </div>
+                            </div>
+                            <div class="col-lg-4">
+                                <div class="form-group">
+                                    <label>Head of System/Function</label>
+                                    <span class="tool-tip-holder" *ngIf='newRequestFlag' tooltip content='HOS' onClick="true">i</span>
+                                    <input [(ngModel)]="RTBSpendRequest.HeadOfSystem.Name" *ngIf='newRequestFlag' type="email" class="form-control" [ngClass]="displayFieldCss('headSysFunc')" formControlName="headSysFunc" disabled="disabled">
+                                    <span class="errorTxt" *ngIf="isFieldValid('headSysFunc')">
+                                        * Required field
+                                    </span>
+                                    <p *ngIf='!newRequestFlag'>{{RTBSpendRequest.HeadOfSystem.Name}}</p>
+                                </div>
+                            </div>
+                            <div class="row">
+                                    <div class="col-lg-12 well">
+                                       
+                                            
+                                      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean euismod bibendum laoreet. Proin gravida dolor sit amet lacus accumsan.
+                                         <br/>CIOCIO Firstname Surname at 17:50 on 01/01/2017</p>
+                                         <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean euismod bibendum laoreet. Proin gravida dolor sit amet lacus accumsan.
+                                            <br/>AMI Firstname Surname at 18:10 on 01/01/2017</p>
+                                           
+                                        
+                                    </div>
+                                  </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 actionbox" *ngIf='newRequestFlag'>
+                    <div class="panel panel-default">
+                        <div class="panel-body">
+                            <button type="button" class="btn btn-danger btn-block" data-toggle="modal" data-target="#myModal">Discard Request</button>
+                            <button type="button" class="btn btn-success btn-block" data-toggle="modal" data-target="#myModalDraft">Save Draft Request</button>
+                            <button type="button" class="btn btn-success btn-block" (click)='reviewRequest();'>Review Request</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 actionbox" *ngIf='!newRequestFlag'>
+                        <div class="panel panel-default">
+                                <div class="panel-body">
+                                        <div class="well" style="margin:0">This request contains 2 notes</div>
+                                        
+                                </div>
+                            </div>
+                    <div class="panel panel-default">
+                        <div class="panel-body">
+                            <div class="row">
+                            
+                            <div class="col-lg-12 text-center"><a href="/spendingrequest">Cancel<br/></a><br/></div>
+                            </div>
+                            
+                            <button type="button" class="btn btn-success btn-block">Continue to GCMC</button>
+                            
+                        </div>
+                    </div>                               
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-9">
+                    <div class="panel panel-primary">
+                        <div class="panel-heading">
+                            <div class="panel-title">Request stakeholder contact details</div>
+                        </div>
+                        <div class="panel-body">
+                            <div class="row">
+                                    <div class="col-lg-4">
+                                            <div class="form-group">
+                                                <label>Requestor Name</label>
+                                                <input [(ngModel)]="RTBSpendRequest.Requestor.Name" *ngIf='newRequestFlag' type="text" class="form-control"  [ngClass]="displayFieldCss('reqName')" formControlName="reqName">
+                                                <span class="errorTxt" *ngIf="isFieldValid('reqName')">
+                                                    * Required field
+                                                </span>
+                                                <p *ngIf='!newRequestFlag'>{{RTBSpendRequest.Requestor.Name}}</p>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-4">
+                                            <div class="form-group">
+                                                <label>Requestor Email</label>
+                                                <span *ngIf='newRequestFlag' class="tool-tip-holder" tooltip content='REQ_EMAIL' onClick="true">i</span>
+                                                <input [(ngModel)]="RTBSpendRequest.Requestor.Email" *ngIf='newRequestFlag' type="text" class="form-control" [ngClass]="displayFieldCss('reqEmail')" formControlName="reqEmail">
+                                                <span class="errorTxt" *ngIf="isFieldValid('reqEmail')">
+                                                    * Required field with valid email address
+                                                </span>
+                                                <p *ngIf='!newRequestFlag'>{{RTBSpendRequest.Requestor.Email}}</p>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-4">
+                                            <div class="form-group">
+                                                <label>Requestor Contact Number</label>
+                                                <input [(ngModel)]="RTBSpendRequest.Requestor.ContactNumber" *ngIf='newRequestFlag' type="text" class="form-control"  [ngClass]="displayFieldCss('reqContact')" formControlName="reqContact">
+                                                <span class="errorTxt" *ngIf="isFieldValid('reqContact')">
+                                                    * Required field with 11 digits only
+                                                </span>
+                                                <p *ngIf='!newRequestFlag'>{{RTBSpendRequest.Requestor.ContactNumber}}</p>
+                                            </div>
+                                        </div>
+                            </div>
+                            <div class="row">
+                                    <div class="col-lg-4">
+                                            <div class="form-group">
+                                                <label>AMI Partner Engaged</label>
+                                                <input [(ngModel)]="RTBSpendRequest.AMIPartnerEngaged.Name" *ngIf='newRequestFlag' type="text" class="form-control"  [ngClass]="displayFieldCss('amiPartEng')" formControlName="amiPartEng">
+                                                <span class="errorTxt" *ngIf="isFieldValid('amiPartEng')">
+                                                    * Required field
+                                                </span>
+                                                <p *ngIf='!newRequestFlag'>{{RTBSpendRequest.AMIPartnerEngaged.Name}}</p>
+                                            </div>
+                                        </div>
+                                       
+                                        <div class="col-lg-4" *ngIf='(selectedOption === "Under £50K") || (selectedOption === "£50K to < £250K")'>
+                                            <div class="form-group">
+                                                <label>CIO Contact Engaged</label>
+                                                <span *ngIf='newRequestFlag' class="tool-tip-holder" tooltip content='CIO_ENGAGED'  onClick="true">i</span>
+                                                <input [(ngModel)]="RTBSpendRequest.CIOContactEngaged.Name" *ngIf='newRequestFlag' type="text" class="form-control"  [ngClass]="displayFieldCss('cioContact')" formControlName="cioContact">
+                                                <span class="errorTxt" *ngIf="isFieldValid('cioContact')">
+                                                    * Required field
+                                                </span>
+                                                <p *ngIf='!newRequestFlag'>{{RTBSpendRequest.CIOContactEngaged.Name}}</p>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-4" *ngIf='(selectedOption === "£250K to < £1M") || (selectedOption === "£1M to < £2M") || (selectedOption === "£2M to < £10M") || (selectedOption === "£10M and above")'>
+                                            <div class="form-group">
+                                                <label>TAG Presenter</label>
+                                                <span *ngIf='newRequestFlag' class="tool-tip-holder" tooltip content='TAG_PRESENT' onClick="true">i</span>
+                                                <input [(ngModel)]="RTBSpendRequest.TACPresenter.Name" *ngIf='newRequestFlag' type="text" class="form-control"  [ngClass]="displayFieldCss('techAcquiGate')"  formControlName="techAcquiGate">
+                                                <span class="errorTxt" *ngIf="isFieldValid('techAcquiGate')">
+                                                    * Required field
+                                                </span>
+                                                <p *ngIf='!newRequestFlag'>{{RTBSpendRequest.TACPresenter.Name}}</p>
+                                            </div>
+                                        </div>
+                            </div>
+                            <div class="row">
+                                    <div class="col-lg-4" *ngIf='(selectedOption === "£250K to < £1M") || (selectedOption === "£1M to < £2M") || (selectedOption === "£2M to < £10M") || (selectedOption === "£10M and above")'>
+                                            <div class="form-group">
+                                                <label>Technology Acquisition Gate Presenter</label>
+                                                <span *ngIf='newRequestFlag' class="tool-tip-holder" tooltip content='TAG_PRESENT_EMAIL'  onClick="true">i</span>
+                                                <input [(ngModel)]="RTBSpendRequest.TechnologyAcquisitionGatePresenter.Name" *ngIf='newRequestFlag' type="text" class="form-control" [ngClass]="displayFieldCss('techAcquiGateEmail')" formControlName="techAcquiGateEmail">
+                                                <span class="errorTxt" *ngIf="isFieldValid('techAcquiGateEmail')">
+                                                    * Required field
+                                                </span>
+                                                <p *ngIf='!newRequestFlag'>{{RTBSpendRequest.TechnologyAcquisitionGatePresenter.Name}}</p>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-4" *ngIf='(selectedOption === "£1M to < £2M") || (selectedOption === "£2M to < £10M") || (selectedOption === "£10M and above")'>
+                                            <div class="form-group">
+                                                <label>GCMCPresenter</label>
+                                                <span *ngIf='newRequestFlag' class="tool-tip-holder" tooltip content='toolTipJson.requestTitle'>i</span>
+                                                <input [(ngModel)]="RTBSpendRequest.GCMCPresenter.Name" *ngIf='newRequestFlag' type="text" class="form-control"  [ngClass]="displayFieldCss('tacPresenter')" formControlName="tacPresenter">
+                                                <span class="errorTxt" *ngIf="isFieldValid('tacPresenter')">
+                                                    * Required field
+                                                </span>
+                                                <p *ngIf='!newRequestFlag'>{{RTBSpendRequest.GCMCPresenter.Name}}</p>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-4" *ngIf='(selectedOption === "£2M to < £10M")'>
+                                            <div class="form-group">
+                                                <label>Cost Forum Presenter</label>
+                                                <span *ngIf='newRequestFlag' class="tool-tip-holder" tooltip content='COST_FORUM_PRES'  onClick="true">i</span>
+                                                <input [(ngModel)]="RTBSpendRequest.CostForumPresenter.Name" *ngIf='newRequestFlag' type="text" class="form-control"  [ngClass]="displayFieldCss('costForum')" formControlName="costForum">
+                                                <span class="errorTxt" *ngIf="isFieldValid('costForum')">
+                                                    * Required field
+                                                </span>
+                                                <p *ngIf='!newRequestFlag'>{{RTBSpendRequest.CostForumPresenter.Name}}</p>
+                                            </div>
+                                        </div>
+                            </div>
+                           
+    
+                            <div class="col-lg-12">
+                                <p>The fields below are reviewed by CMU Executives to make an approval decision. To gain a quick approval please make sure appropriate information and relevant justification is included, using language appropriate for an executive audience.
+                                </p>
+                            </div>
+                            <div class="col-lg-12">
+                                <p>Executive Summary
+                                    <br/>
+                                    <br/>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean euismod bibendum laoreet. Proin gravida dolor sit amet lacus accumsan et viverra justo commodo. Proin sodales pulvinar tempor. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Nam fermentum, nulla luctus pharetra vulputate.</p>
+                            </div>
+                            <div class="col-lg-12">
+                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean euismod bibendum laoreet. Proin gravida dolor sit amet lacus accumsan et viverra justo commodo. Proin sodales pulvinar tempor. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Nam fermentum, nulla luctus pharetra vulputate.
+                                </p>
+                            </div>
+                            <div class="col-lg-12">
+                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean euismod bibendum laoreet. Proin gravida dolor sit amet lacus accumsan et viverra justo commodo.
+                                </p>
+                            </div>
+                            <div>
+    
+                                
+    
+                                <div formArrayName="dynstakeHolderFields">
+                                <div *ngFor="let dynstakeField of newSRForm.controls.dynstakeHolderFields.controls;let dynStakefields = index">
+                                    <div [formGroupName]="dynStakefields">
+                                    <div class="clearfix"></div>
+                                    <div class="col-lg-3">
+                                        <div class="form-group">
+                                            <label>Description</label>
+                                            <span *ngIf='newRequestFlag' class="tool-tip-holder" tooltip content='PROD_SERV_DESC'  onClick="true">i</span>
+                                            <input [(ngModel)]="RTBSpendRequest.ItemDetails[dynStakefields].Description" *ngIf='newRequestFlag' type="text" class="form-control"  formControlName="dynDesc" />
+                                            <p *ngIf='!newRequestFlag'>{{RTBSpendRequest.ItemDetails[dynStakefields].Description}}</p>
+                                        </div>                                    
+                                    </div>
+                                    <div class="col-lg-3">
+                                        <div class="form-group">
+                                            <label>Category</label>
+                                            <select [(ngModel)]="RTBSpendRequest.ItemDetails[dynStakefields].Category" *ngIf='newRequestFlag' class="form-control" [ngClass]="displayFieldCss('amountSpend')" formControlName="dynCat">
+                                                    <option *ngFor="let cat of CategoryList" [ngValue]="cat">
+                                                       {{cat.Name}}
+                                                    </option>
+                                                 </select>
+                                           
+                                            <p *ngIf='!newRequestFlag'>{{RTBSpendRequest.ItemDetails[dynStakefields].Category.Name}}</p>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-2">
+                                        <div class="form-group">
+                                            <label>Start Date</label>
+                                            <input [(ngModel)]="RTBSpendRequest.ItemDetails[dynStakefields].StartDate" *ngIf='newRequestFlag' type="date" class="form-control"   formControlName="dynStDate" />
+                                             <p *ngIf='!newRequestFlag'>{{RTBSpendRequest.ItemDetails[dynStakefields].StartDate}}</p>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-2">
+                                        <div class="form-group">
+                                            <label>End Date</label>
+                                            <input [(ngModel)]="RTBSpendRequest.ItemDetails[dynStakefields].EndDate" *ngIf='newRequestFlag' type="date" class="form-control"   formControlName="dynEnddate" />
+                                            <p *ngIf='!newRequestFlag'>{{RTBSpendRequest.ItemDetails[dynStakefields].EndDate}}</p>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-2">
+                                        <div class="form-group">
+                                            <label>Costs</label>
+                                            <a *ngIf="newRequestFlag && newSRForm.controls.dynstakeHolderFields.controls.length !== 0 && newSRForm.controls.dynstakeHolderFields.controls.indexOf(newSRForm.controls.dynstakeHolderFields.controls[dynStakefields]) == 0" (click)="addRow()" class="plusminusButton">
+                                                <span  class="glyphicon-plus"></span>
+                                            </a>
+                                            <a *ngIf="newRequestFlag && newSRForm.controls.dynstakeHolderFields.controls.length > 1 && newSRForm.controls.dynstakeHolderFields.controls.indexOf(newSRForm.controls.dynstakeHolderFields.controls[dynStakefields]) !== 0" (click)="deleteRow(dynStakefields)" class="plusminusButton">
+                                                    <span  class="glyphicon-minus"></span>
+                                            </a>
+                                            <input [(ngModel)]="RTBSpendRequest.ItemDetails[dynStakefields].Costs" (blur)="calTotalAmount();" *ngIf='newRequestFlag' type="number" class="form-control"  formControlName="dynCost" />
+                                            <p *ngIf='!newRequestFlag'>{{RTBSpendRequest.ItemDetails[dynStakefields].Costs}}</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                </div>
+                                </div> 
+                                <div class="col-lg-2 pull-right">
+                                    <div class="form-group">{{RTBSpendRequest.TotalVatAmount}} </div>
+                                </div>
+                                <div class="col-lg-4 pull-right">
+                                    <div class="form-group">
+                                        <label>VAT</label>
+                                        <span *ngIf='newRequestFlag' class="tool-tip-holder" tooltip content='VAT' onClick="true">i</span>
+                                        <select [(ngModel)]="RTBSpendRequest.Vat" *ngIf='newRequestFlag' class="form-control" formControlName="vat" (change)="calTotalVatAmount();" [ngClass]="displayFieldCss('vat')">
+                                                <option *ngFor="let obj of VatList" [ngValue]="obj">
+                                                   {{obj}}
+                                                </option>
+                                        </select>
+                                        <!-- <input *ngIf='newRequestFlag' type="text" class="form-control" id="exampleInputEmail1" placeholder="Request Title" formControlName="vat" [ngClass]="displayFieldCss('vat')" /> -->
+                                        <span class="errorTxt" *ngIf="isFieldValid('vat')">
+                                            * Required field
+                                        </span>
+                                        <p *ngIf='!newRequestFlag'>{{RTBSpendRequest.Vat}}</p>
+                                    </div>
+                                </div>
+                                <div class="clearfix"></div>
+                                <div class="col-lg-2 pull-right">
+                                    <div class="form-group">{{RTBSpendRequest.TotalSpendAmount}}</div>
+                                </div>
+    
+                                <div class="col-lg-4 pull-right">Spend Amount
+                                    <span *ngIf='newRequestFlag' class="tool-tip-holder" tooltip content='toolTipJson.requestTitle'>i</span>
+                                </div>
+                            </div>
+    
+    
+                            <div class="col-lg-12">
+                                    <div role="col-lg-12 separator" class="divider"></div>
+                                    <div class="form-group">
+                                        <label>What is this hardware and what is it used for: </label>
+                                        <textarea [(ngModel)]="RTBSpendRequest.ItemQuestion1" *ngIf='newRequestFlag' class="form-control" rows="" formControlName='itemquestion1'></textarea>
+                                        <p *ngIf='!newRequestFlag' >{{RTBSpendRequest.ItemQuestion1}}</p>
+                                    </div>
+                                </div>
+                                <div class="col-lg-12">
+                                    <div class="form-group">
+                                        <label>As a result of this purchase are we decommissioning any existing software and are there any associated support savings:</label>
+                                        <textarea  [(ngModel)]="RTBSpendRequest.ItemQuestion2" *ngIf='newRequestFlag' class="form-control"  rows="" formControlName='itemquestion2'></textarea>
+                                        <p *ngIf='!newRequestFlag'>{{RTBSpendRequest.ItemQuestion2}}</p>
+                                    </div>
+                                </div>
+                                <div class="col-lg-12">
+                                    <div class="form-group">
+                                        <label>Confirm which area will own and support this hardware:</label>
+                                        <textarea [(ngModel)]="RTBSpendRequest.ItemQuestion3" *ngIf='newRequestFlag' class="form-control"  rows="   " formControlName='itemquestion3'></textarea>
+                                        <p *ngIf='!newRequestFlag'>{{RTBSpendRequest.ItemQuestion3}}</p>
+                                    </div>
+                                </div>
+                                <div class="col-lg-12">
+                                    <div class="form-group">
+                                        <label>Justify choice of supplier:</label>
+                                        <textarea  [(ngModel)]="RTBSpendRequest.ItemQuestion4" *ngIf='newRequestFlag' class="form-control" rows="   " formControlName='itemquestion4'></textarea>
+                                        <p *ngIf='!newRequestFlag'>{{RTBSpendRequest.ItemQuestion4}}</p>
+                                    </div>
+                                </div>
+                                <div class="col-lg-12">
+                                    <div class="form-group">
+                                        <label>If your spend contains licenses please state whether these are term subscription or perpetual licences and justify the position:</label>
+                                        <textarea [(ngModel)]="RTBSpendRequest.ItemQuestion5" *ngIf='newRequestFlag' class="form-control"  rows="3" cols="3" formControlName='itemquestion5'></textarea>
+                                        <p *ngIf='!newRequestFlag'>{{RTBSpendRequest.ItemQuestion5}}</p>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                        <div class="col-lg-12 well">
+                                           
+                                                
+                                          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean euismod bibendum laoreet. Proin gravida dolor sit amet lacus accumsan.
+                                             <br/>CIOCIO Firstname Surname at 17:50 on 01/01/2017</p>
+                                             <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean euismod bibendum laoreet. Proin gravida dolor sit amet lacus accumsan.
+                                                <br/>AMI Firstname Surname at 18:10 on 01/01/2017</p>
+                                               
+                                            
+                                        </div>
+                                      </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-9">
+                    <div class="panel panel-primary">
+                        <div class="panel-heading">
+                            <div class="panel-title">Sourcing</div>
+                        </div>
+                        <div class="panel-body">
+                                <div class="row">
+                                        <div class="col-lg-6">
+                                                <div class="form-group">
+                                                    <label>Sourcing Contact Engaged</label>
+                                                    <span *ngIf='newRequestFlag' class="tool-tip-holder" tooltip content='SOURCE_ENG' onClick="true">i</span>
+                                                    <input [(ngModel)]="RTBSpendRequest.SourcingContactEngaged.Name" type="text" *ngIf='newRequestFlag' class="form-control" placeholder="" [ngClass]="displayFieldCss('sourcingEng')" formControlName="sourcingEng" />
+                                                    <span class="errorTxt"  *ngIf="isFieldValid('sourcingEng')">
+                                                        * Required field
+                                                    </span>
+                                                    <p *ngIf='!newRequestFlag'>{{RTBSpendRequest.SourcingContactEngaged.Name}}</p>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-6">
+                                                <div class="form-group">
+                                                    <label>Spend Type </label>
+                                                    <span *ngIf='newRequestFlag' class="tool-tip-holder" tooltip content='SPEND_TYPE' onClick="true">i</span>
+                                                    <input [(ngModel)]="RTBSpendRequest.SpendType" type="text" *ngIf='newRequestFlag' class="form-control" placeholder="" [ngClass]="displayFieldCss('sourcespendType')" formControlName="sourcespendType">
+                                                    <span class="errorTxt" *ngIf="isFieldValid('sourcespendType')">
+                                                        * Required field
+                                                    </span>
+                                                    <p *ngIf='!newRequestFlag'>{{RTBSpendRequest.SpendType}}</p>
+                                                </div>
+                                            </div>
+                                </div>
+                                <div class="row">
+                                        <div class="col-lg-6">
+                                                <div class="form-group">
+                                                    <label>Pricing Terms</label>
+                                                    <span *ngIf='newRequestFlag' class="tool-tip-holder" tooltip content='PRICING_TERMS' onClick="true">i</span>
+                                                    <input [(ngModel)]="RTBSpendRequest.PricingTerms.Name" type="text" *ngIf='newRequestFlag' class="form-control" id="exampleInputEmail1" placeholder="" [ngClass]="displayFieldCss('pricingTerms')" formControlName="pricingTerms">
+                                                    <span class="errorTxt" *ngIf="isFieldValid('pricingTerms')">
+                                                        * Required field
+                                                    </span>
+                                                    <p *ngIf='!newRequestFlag'>{{RTBSpendRequest.PricingTerms.Name}}</p>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-6">
+                                                <div class="form-group">
+                                                    <label>Buying Online Supplier</label>
+                                                    <span *ngIf='newRequestFlag' class="tool-tip-holder" tooltip content='BUY_ONLINE' onClick="true">i</span>
+                                                    <input [(ngModel)]="RTBSpendRequest.BuyingOnlineSupplier.Name" type="text" *ngIf='newRequestFlag' class="form-control" id="exampleInputEmail1" placeholder="" [ngClass]="displayFieldCss('buyingOnline')" formControlName="buyingOnline">
+                                                    <span class="errorTxt" *ngIf="isFieldValid('buyingOnline')">
+                                                        * Required field
+                                                    </span>
+                                                    <p *ngIf='!newRequestFlag'>{{RTBSpendRequest.BuyingOnlineSupplier.Name}}</p>
+                                                </div>
+                                            </div>
+                                </div>
+                                <div class="row">
+                                        <div class="col-lg-6">
+                                                <div class="form-group">
+                                                    <label>Manufacturer (if different to Supplier)e</label>
+                                                    <span *ngIf='newRequestFlag' class="tool-tip-holder" tooltip content='MANUFACTURER' onClick="true">i</span>
+                                                    <input [(ngModel)]="RTBSpendRequest.Manufacturer" type="text" *ngIf='newRequestFlag' class="form-control" id="exampleInputEmail1" placeholder="" [ngClass]="displayFieldCss('manufacturer')" formControlName="manufacturer">
+                                                    <span class="errorTxt" *ngIf="isFieldValid('manufacturer')">
+                                                        * Required field
+                                                    </span>
+                                                    <p *ngIf='!newRequestFlag'>{{RTBSpendRequest.Manufacturer}}</p>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-6">
+                                                <div class="form-group">
+                                                    <label>Cost % for Annual Maintenance & Support</label>
+                                                    <input [(ngModel)]="RTBSpendRequest.AMC" type="text" *ngIf='newRequestFlag' class="form-control" id="exampleInputEmail1" placeholder=""  [ngClass]="displayFieldCss('annuMaint')" formControlName="annuMaint">
+                                                    <span class="errorTxt" *ngIf="isFieldValid('annuMaint')">
+                                                        * Required field
+                                                    </span>
+                                                    <p *ngIf='!newRequestFlag'>{{RTBSpendRequest.AMC}}</p>
+                                                    <span *ngIf='newRequestFlag'>Should be 18% or lower for 24x7 support (leave blank if N/A)</span>
+                                                </div>
+                                            </div>
+                                </div>
+    
+            
+            
+    
+    
+    
+                            <div role="col-lg-12 separator" class="divider"></div>
+                            <div class="col-lg-12">
+                                    <p>Does this request include an element of RPI?</p>
+                                    <div *ngIf='newRequestFlag'>
+                                        <label class="radio-inline">
+                                            <input [(ngModel)]="RTBSpendRequest.RPIQuestion" type="radio" id="inlineRadio1" value="Yes" [ngClass]="displayFieldCss('rpiRadio')"
+                                            formControlName="rpiRadio">
+                                            Yes
+                                            <span class="errorTxt" *ngIf="isFieldValid('rpiRadio')">
+                                            * Required field
+                                        </span> 
+                                        </label>
+                                        <label class="radio-inline">
+                                            <input [(ngModel)]="RTBSpendRequest.RPIQuestion" type="radio" id="inlineRadio2" value="No" [ngClass]="displayFieldCss('rpiRadio')" formControlName="rpiRadio">No
+                                            <span class="errorTxt" *ngIf="isFieldValid('rpiRadio')">
+                                                * Required field
+                                            </span> 
+                                        </label>
+                                        <label class="radio-inline">
+                                            <input [(ngModel)]="RTBSpendRequest.RPIQuestion" type="radio" id="inlineRadio3" value="N/A" [ngClass]="displayFieldCss('rpiRadio')" formControlName="rpiRadio"> N/A
+                                            <span class="errorTxt" *ngIf="isFieldValid('rpiRadio')">
+                                                * Required field
+                                            </span> 
+                                        </label>
+                                    </div>
+                                    <div *ngIf='!newRequestFlag'>{{RTBSpendRequest.RPIQuestion}}</div>
+                                </div>
+                                <div class="col-lg-12">
+                                    <p>Is there a clause allowing third party ownership of Intellectual Property Rights where development work has been funded by LBG?</p>
+                                    <div *ngIf='newRequestFlag'>
+                                        <label class="radio-inline">
+                                            <input [(ngModel)]="RTBSpendRequest.LBGQuestion" type="radio" id="inlineRadio4" value="Yes" [ngClass]="displayFieldCss('thirdPartyRadio')" formControlName="thirdPartyRadio">Yes
+                                            <span class="errorTxt" *ngIf="isFieldValid('thirdPartyRadio')">
+                                                * Required field
+                                            </span> 
+                                        </label>
+                                          <label class="radio-inline">
+                                            <input [(ngModel)]="RTBSpendRequest.LBGQuestion" type="radio" id="inlineRadio5" value="No" [ngClass]="displayFieldCss('thirdPartyRadio')" formControlName="thirdPartyRadio">No
+                                            <span class="errorTxt" *ngIf="isFieldValid('thirdPartyRadio')">
+                                                * Required field
+                                            </span> 
+                                        </label>
+                                          <label class="radio-inline">
+                                            <input [(ngModel)]="RTBSpendRequest.LBGQuestion"  type="radio" id="inlineRadio6" value="N/A" [ngClass]="displayFieldCss('thirdPartyRadio')" formControlName="thirdPartyRadio">N/A
+                                            <span class="errorTxt" *ngIf="isFieldValid('thirdPartyRadio')">
+                                                * Required field
+                                            </span> 
+                                        </label>
+                                    </div>
+                                    <div *ngIf='!newRequestFlag'>{{RTBSpendRequest.LBGQuestion}}</div>
+                                </div>
+                                <div class="col-lg-12">
+                                    <p>Is this for a Tier A application? If so does the supplier adhere to necessary service levels? If it is not a Tier A application please enter N/A</p>
+                                    <div *ngIf='newRequestFlag'>
+                                        <label class="radio-inline">
+                                            <input [(ngModel)]="RTBSpendRequest.TierAQuestion" type="radio" id="inlineRadio7" value="Yes" [ngClass]="displayFieldCss('necessServiceRadio')" formControlName="necessServiceRadio"> Yes
+                                            <span class="errorTxt" *ngIf="isFieldValid('necessServiceRadio')">
+                                                * Required field
+                                            </span> 
+                                        </label>
+                                        <label class="radio-inline">
+                                            <input [(ngModel)]="RTBSpendRequest.TierAQuestion" type="radio" id="inlineRadio8" value="No" [ngClass]="displayFieldCss('necessServiceRadio')" formControlName="necessServiceRadio"> No
+                                            <span class="errorTxt" *ngIf="isFieldValid('necessServiceRadio')">
+                                                * Required field
+                                            </span> 
+                                        </label>
+                                        <label class="radio-inline">
+                                            <input [(ngModel)]="RTBSpendRequest.TierAQuestion" type="radio" id="inlineRadio9" value="N/A" [ngClass]="displayFieldCss('necessServiceRadio')" formControlName="necessServiceRadio"> N/A
+                                            <span class="errorTxt" *ngIf="isFieldValid('necessServiceRadio')">
+                                                * Required field
+                                            </span> 
+                                        </label>
+                                    </div>
+                                    <div *ngIf='!newRequestFlag'>{{RTBSpendRequest.TierAQuestion}}</div>                           
+                                </div>
+        
+        
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-9">
+                    <div class="panel panel-primary">
+                        <div class="panel-heading">
+                            <div class="panel-title">
+                                Finance
+                            </div>
+                        </div>
+                        <div class="panel-body">
+                            <div class="row">
+                                    <div class="col-lg-6">
+                                            <div class="form-group">
+                                                <label>Finance Contact Engaged</label>
+                                                <span *ngIf='newRequestFlag' class="tool-tip-holder" tooltip content='FINANCE_ENG'>i</span>
+                                                <input [(ngModel)]="RTBSpendRequest.FinanceContactEngaged.Name" *ngIf='newRequestFlag' type="text" class="form-control" id="exampleInputEmail1" placeholder="" [ngClass]="displayFieldCss('financeContact')" formControlName="financeContact">
+                                                <span class="errorTxt" *ngIf="isFieldValid('financeContact')">
+                                                    * Required field
+                                                </span>
+                                                <p *ngIf='!newRequestFlag'>{{RTBSpendRequest.FinanceContactEngaged.Name}}</p>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <div class="form-group">
+                                                <label>Project Name</label>
+                                                <input [(ngModel)]="RTBSpendRequest.Project.Name" *ngIf='newRequestFlag' type="text" class="form-control" id="exampleInputEmail1" placeholder="" [ngClass]="displayFieldCss('projectName')"  formControlName="projectName">
+                                                <span class="errorTxt" *ngIf="isFieldValid('projectName')">
+                                                    * Required field
+                                                </span>
+                                                <p *ngIf='!newRequestFlag'>{{RTBSpendRequest.Project.Name}}</p>
+                                            </div>
+                                        </div>    
+                            </div> 
+                            <div class="row">
+                                    <div class="col-lg-6">
+                                            <div class="form-group">
+                                                <label>Programme Title</label>
+                                                <input [(ngModel)]="RTBSpendRequest.ProgrammeTitle" *ngIf='newRequestFlag' type="text" class="form-control" id="exampleInputEmail1" placeholder="" [ngClass]="displayFieldCss('programTitle')" formControlName="programTitle">
+                                                <span class="errorTxt" *ngIf="isFieldValid('programTitle')">
+                                                    * Required field
+                                                </span>
+                                                <p *ngIf='!newRequestFlag'>{{RTBSpendRequest.ProgrammeTitle}}</p>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <div class="form-group">
+                                                <label>Budget Type</label>
+                                                <input [(ngModel)]="RTBSpendRequest.BudgetType" *ngIf='newRequestFlag' type="text" class="form-control" id="exampleInputEmail1" placeholder="" [ngClass]="displayFieldCss('budgetType')" formControlName="budgetType">
+                                                <span class="errorTxt" *ngIf="isFieldValid('budgetType')">
+                                                    * Required field
+                                                </span>
+                                                <p *ngIf='!newRequestFlag'>{{RTBSpendRequest.BudgetType}}</p>
+                                            </div>
+                                        </div>
+                            
+                            </div>                       
+                            <div class="row">
+                                    <div class="col-lg-6">
+                                            <div class="form-group">
+                                                <label>Budget Subtype</label>
+                                                <input [(ngModel)]="RTBSpendRequest.BudgetSubtype" *ngIf='newRequestFlag' type="text" class="form-control" id="exampleInputEmail1" placeholder="" [ngClass]="displayFieldCss('budgetSubType')" formControlName="budgetSubType">
+                                                <span class="errorTxt" *ngIf="isFieldValid('budgetSubType')">
+                                                    * Required field
+                                                </span>
+                                                <p *ngIf='!newRequestFlag'>{{RTBSpendRequest.BudgetSubtype}}</p>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <div class="form-group">
+                                                <label>Cost Centre</label>
+                                                <input [(ngModel)]="RTBSpendRequest.CostCentre" *ngIf='newRequestFlag' type="text" class="form-control" id="exampleInputEmail1" placeholder="" [ngClass]="displayFieldCss('costCentre')" formControlName="costCentre">
+                                                <span class="errorTxt" *ngIf="isFieldValid('costCentre')">
+                                                    * Required field
+                                                </span>
+                                                <p *ngIf='!newRequestFlag'>{{RTBSpendRequest.CostCentre}}</p>
+                                            </div>
+                                        </div>
+                            </div>
+                            <div class="row">
+                                    <div class="col-lg-6">
+                                            <div class="form-group">
+                                                <label>PRN</label>
+                                                <input [(ngModel)]="RTBSpendRequest.PRN" *ngIf='newRequestFlag' type="text" class="form-control" id="exampleInputEmail1" placeholder="" [ngClass]="displayFieldCss('prn')" formControlName="prn">
+                                                <span class="errorTxt" *ngIf="isFieldValid('prn')">
+                                                    * Required field
+                                                </span>
+                                                <p *ngIf='!newRequestFlag'>{{RTBSpendRequest.PRN}}</p>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <div class="form-group">
+                                                <label>Spend GL Code (list)</label>
+                                                <span *ngIf='newRequestFlag' class="tool-tip-holder" tooltip content='GL_CODE'>i</span>
+                                                <input [(ngModel)]="RTBSpendRequest.SpendGLCode" *ngIf='newRequestFlag' type="text" class="form-control" id="exampleInputEmail1" placeholder="" [ngClass]="displayFieldCss('spendGL')" formControlName="spendGL">
+                                                <span class="errorTxt" *ngIf="isFieldValid('spendGL')">
+                                                    * Required field
+                                                </span>
+                                                <p *ngIf='!newRequestFlag'>{{RTBSpendRequest.SpendGLCode}}</p>
+                                            </div>
+                                        </div>
+                            </div>
+                            <div class="row">
+                                    <div class="col-lg-6">
+                                            <div class="form-group">
+                                                <label>WBS validation Check</label>
+                                                <input [(ngModel)]="RTBSpendRequest.WBSValidationCheck" *ngIf='newRequestFlag' type="text" class="form-control" id="exampleInputEmail1" placeholder="" [ngClass]="displayFieldCss('wbsvalidation')" formControlName="wbsvalidation">
+                                                <span class="errorTxt" *ngIf="isFieldValid('wbsvalidation')">
+                                                    * Required field
+                                                </span>
+                                                <p *ngIf='!newRequestFlag'>{{RTBSpendRequest.WBSValidationCheck}}</p>
+                                            </div>
+                                        </div>
+                            </div>
+                            <div class="col-lg-12">
+                                    
+                                    <p>Does this contract cover systems and services that is included in a divestment programme?
+                                    <span *ngIf='!newRequestFlag'>Yes</span></p>
+                                    
+                                    <div *ngIf='newRequestFlag'>
+                                    
+                                    <label
+                                    class="radio-inline">
+                                    
+                                    <input [(ngModel)]="RTBSpendRequest.IsDivestmentProgramme"
+                                    type="radio"
+                                    id="inlineRadio1"
+                                    value="Yes" [ngClass]="displayFieldCss('contractDivest')"
+                                    formControlName="contractDivest"> Yes
+                                    
+                                    <span
+                                    class="errorTxt" *ngIf="isFieldValid('contractDivest')">
+                                    
+                                    * Required field
+                                    
+                                    </span>
+                                    
+                                    </label>
+                                    
+                                    <label
+                                    class="radio-inline">
+                                    
+                                    <input [(ngModel)]="RTBSpendRequest.IsDivestmentProgramme"
+                                    type="radio"
+                                    id="inlineRadio2"
+                                    value="No" [ngClass]="displayFieldCss('contractDivest')"
+                                    formControlName="contractDivest"> No
+                                    
+                                    <span
+                                    class="errorTxt" *ngIf="isFieldValid('contractDivest')">
+                                    
+                                    * Required field
+                                    
+                                    </span>
+                                    
+                                    </label>
+                                    
+                                    </div>
+                                    </div>
+    
+    
+                            <div role="col-lg-12 separator" class="divider"></div>
+                            <div class="col-lg-12">
+                                <p>Supply Area
+                                    <br/>
+                                    <br/>The supply area owns, or will own the ongoing costs associated with this spend (BAU budget) or provides the service to the Divisional CIO sponsor.
+                                </p>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="form-group">
+                                    <label>Area</label>
+                                    <select [(ngModel)]="RTBSpendRequest.Area" (change)="setAreaHeadOfSystem();" *ngIf='newRequestFlag' class="form-control" [ngClass]="displayFieldCss('area')"  formControlName="area">
+                                        <option *ngFor="let obj of AreaList" [ngValue]="obj">
+                                           {{obj.Name}}
+                                        </option>
+                                     </select>
+                                    
+                                    <span class="errorTxt" *ngIf="isFieldValid('area')">
+                                        * Required field
+                                    </span>
+                                    <p *ngIf='!newRequestFlag'>Group Operations / Group IT / Infrastructure Tech Service / Infrastructure Projects</p>
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="form-group">
+                                    <label>Head of System/Function</label>
+                                    <input readonly [(ngModel)]="RTBSpendRequest.AreaHeadOfSystem.Name" type="text" *ngIf='newRequestFlag' class="form-control" id="exampleInputEmail1" placeholder="" [ngClass]="displayFieldCss('headsys')"  formControlName="headsys">
+                                    
+                                    <p *ngIf='!newRequestFlag'>{{RTBSpendRequest.AreaHeadOfSystem.Name}}</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-9">
+                    <div class="panel panel-primary">
+                        <div class="panel-heading">
+                            <div class="panel-title">Financial Information </div>
+                        </div>
+                        <div class="panel-body">
+                            <div formArrayName="dynFinanceInfoFields">
+                                <div *ngFor="let dynFinInfoField of newSRForm.controls.dynFinanceInfoFields.controls; let dynFinInfofields = index">
+                                    <div [formGroupName]="dynFinInfofields">
+                                    <div class="clearfix"></div>
+                                        <div class="col-lg-2">
+                                            <div class="form-group">
+                                            <label>Year</label>
+                                            <input [(ngModel)]="RTBSpendRequest.FinancialInformation[dynFinInfofields].Year" type="text" *ngIf='newRequestFlag' class="form-control" id="exampleInputEmail1" placeholder="" formControlName="dynYear" />
+                                            <p *ngIf='!newRequestFlag'>{{RTBSpendRequest.FinancialInformation[dynFinInfofields].Year}}</p>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-2">
+                                            <div class="form-group">
+                                            <label>Budget</label>
+                                            <input [(ngModel)]="RTBSpendRequest.FinancialInformation[dynFinInfofields].Budget" type="text" *ngIf='newRequestFlag' class="form-control" id="exampleInputEmail1" placeholder="" formControlName="dynBudget" />
+                                            <p *ngIf='!newRequestFlag'>{{RTBSpendRequest.FinancialInformation[dynFinInfofields].Budget}}</p>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-2">
+                                            <div class="form-group">
+                                            <label>Forecast/Actual</label>
+                                            <input [(ngModel)]="RTBSpendRequest.FinancialInformation[dynFinInfofields].Forecast" type="text" *ngIf='newRequestFlag' class="form-control" id="exampleInputEmail1" placeholder="" formControlName="dynFrCst" />
+                                            <p *ngIf='!newRequestFlag'>{{RTBSpendRequest.FinancialInformation[dynFinInfofields].Forecast}}</p>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-2">
+                                            <div class="form-group">
+                                            <label>Threat/Benefit</label>
+                                            <input [(ngModel)]="RTBSpendRequest.FinancialInformation[dynFinInfofields].Threat" type="text" *ngIf='newRequestFlag' class="form-control" id="exampleInputEmail1" placeholder="" formControlName="dynThrtBen" />
+                                            <p *ngIf='!newRequestFlag'>{{RTBSpendRequest.FinancialInformation[dynFinInfofields].Threat}}</p>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-3">
+                                            <div class="form-group">                                                
+                                            <label>Opportunity Identified</label>
+                                            <a *ngIf="newRequestFlag && newSRForm.controls.dynFinanceInfoFields.controls.length !== 0 && newSRForm.controls.dynFinanceInfoFields.controls.indexOf(newSRForm.controls.dynFinanceInfoFields.controls[dynFinInfofields]) == 0" (click)="addFinanceRow()" class="plusminusButton">
+                                                <span class="glyphicon-plus"></span>
+                                            </a>
+                                            <a *ngIf="newRequestFlag && newSRForm.controls.dynFinanceInfoFields.controls.length > 1 && newSRForm.controls.dynFinanceInfoFields.controls.indexOf(newSRForm.controls.dynFinanceInfoFields.controls[dynFinInfofields]) !== 0" (click)="deleteFinanceRow(dynFinInfofields)" class="plusminusButton">
+                                                <span class="glyphicon-minus"></span>
+                                            </a>
+                                            <input [(ngModel)]="RTBSpendRequest.FinancialInformation[dynFinInfofields].Opportunity" type="text" *ngIf='newRequestFlag' class="form-control" id="exampleInputEmail1" placeholder="" formControlName="dynOppIdent" />
+                                            <p *ngIf='!newRequestFlag'>{{RTBSpendRequest.FinancialInformation[dynFinInfofields].Opportunity}}</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-8">
+                                    <div class="form-group">
+                                        <label>Lorem ipsum dolor sit amet</label>
+                                        <textarea [(ngModel)]="RTBSpendRequest.FinancialSummary" *ngIf='newRequestFlag' class="form-control" rows="10" formControlName="FinancialSummary"></textarea>
+                                        <p *ngIf='!newRequestFlag'>{{RTBSpendRequest.FinancialSummary}}</p>
+                                    </div>
+                            </div>
+                            <div class="col-lg-4" *ngIf='newRequestFlag'>
+    
+                                <p>
+                                    <br/> Budget and actuals for RTB - Previous year’s budget and actuals required</p>
+                                <p>
+                                    Budget - Budget in line with latest Forecast Forecast/Actual - Budget / forecast for current year Threat/Benefit - Confirmed saving / overspend. Budget to be updated. If unsure contact your FBP/PPRM’ Opportunity - Potential savings not committed to yet for future budget calculations. If unsure contact your FBP/PPRM’
+                                </p>
+                            </div>
+                            <div class="col-lg-12" *ngIf='!newRequestFlag'>
+                            <p >
+    
+                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean euismod bibendum laoreet. Proin gravida dolor sit amet lacus accumsan et viverra justo commodo. Proin sodales pulvinar tempor. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Nam fermentum, nulla luctus pharetra vulputate.
+                                <br/>
+                                <br/> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean euismod bibendum laoreet. Proin gravida dolor sit amet lacus accumsan et viverra justo commodo. Proin sodales pulvinar tempor. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Nam fermentum, nulla luctus pharetra vulputate.
+                                <br/>
+    
+                            </p>
+                        </div>
+    
+                            <div class="col-lg-12">
+                                    <div role="col-lg-12 separator" class="divider"></div>
+                                    <div class="form-group">
+                                        <label>Explain the budget position and any potential threats, benefits and opportunities: </label>
+                                        <textarea [(ngModel)]="RTBSpendRequest.FinanceQuestion1" *ngIf='newRequestFlag' class="form-control" rows="" placeholder=""[ngClass]="{'has-error':newSRForm.controls.budgetThreat.invalid && newSRForm.controls.budgetThreat.touched }" formControlName="budgetThreat">
+                                        </textarea>
+                                        <span class="errorTxt" [(ngModel)]="RTBSpendRequest.FinanceQuestion1" *ngIf="newSRForm.controls.budgetThreat.invalid && newSRForm.controls.budgetThreat.touched" formControlName="FinancialSummary">
+                                            * Required field
+                                        </span>
+                                        <p *ngIf='!newRequestFlag'>{{RTBSpendRequest.FinanceQuestion1}}</p>
+                                    </div>
+                                </div>
+                                <div class="col-lg-12">
+                                    <div class="form-group">
+                                        <label>Confirm if finance workbook has been signed off:</label>
+                                        <textarea [(ngModel)]="RTBSpendRequest.FinanceQuestion2" *ngIf='newRequestFlag' class="form-control" rows="" placeholder="" formControlName="FinanceQuestion2"></textarea>
+                                        <p *ngIf='!newRequestFlag'>{{RTBSpendRequest.FinanceQuestion2}}</p>
+                                    </div>
+                                </div>
+                                <div class="col-lg-12">
+                                    <div class="form-group">
+                                        <label>Have the ongoing cost been correctly accounted for:</label>
+                                        <textarea [(ngModel)]="RTBSpendRequest.FinanceQuestion3" *ngIf='newRequestFlag' class="form-control" rows="" placeholder="" formControlName="FinanceQuestion3"></textarea>
+                                        <p *ngIf='!newRequestFlag'>{{RTBSpendRequest.FinanceQuestion3}}</p>
+                                    </div>
+                                </div>
+                                <div class="col-lg-12">
+                                    <div class="form-group">
+                                        <label>Is the support maintenance less than or equal to the 18% CMU threshold:</label>
+                                        <textarea [(ngModel)]="RTBSpendRequest.FinanceQuestion4" *ngIf='newRequestFlag' class="form-control" rows="" placeholder="" formControlName="FinanceQuestion4"></textarea>
+                                        <p *ngIf='!newRequestFlag'>{{RTBSpendRequest.FinanceQuestion4}}</p>
+                                    </div>
+                                </div>
+                                <div class="col-lg-12">
+                                    <div class="form-group">
+                                        <label>If this a run the bank request please state last years budget and spend figures and justify any movement in cost:</label>
+                                        <textarea [(ngModel)]="RTBSpendRequest.FinanceQuestion5" *ngIf='newRequestFlag' class="form-control" rows="" placeholder="" formControlName="FinanceQuestion5"></textarea>
+                                        <p *ngIf='!newRequestFlag'>{{RTBSpendRequest.FinanceQuestion5}}</p>
+                                    </div>
+                                </div>
+    
+                        </div>
+                    </div>
+                </div>
+            </div>
+            </form>
+        </div>
+    </div>
+    
+    <!-- above code for new business case-->
+    <!-- Modal To Confirm-->
+    <div class="modal fade bs-example-modal-sm" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel">All current progress will be lost, are you sure you want to discard this request?</h4>
+                </div>
+    
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                    <a (click)='discardRequest();' href="/spendingrequests" type="button" class="btn btn-success btn-sm">Yes, discard</a>
+                </div>
+            </div>
+    
+        </div>
+    </div>
+    <!-- Modal To Draft-->
+    <div class="modal fade bs-example-modal-sm" id="myModalDraft" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title" id="myModalLabel">Are you sure you want to save this request as draft?</h4>
+                    </div>
+        
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">No</button>
+                        <a (click)='saveRequestAsDraft();' href="/spendingrequests" type="button" class="btn btn-success btn-sm">Yes, save</a>
+                    </div>
+                </div>
+        
+            </div>
+        </div>
+    
+    <!-- Modal To Submit Data-->
+    <div class="modal fade bs-example-modal-sm" id="myModal2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel">JSON format data that will be sent to operation layer:</h4>
+                    <p>{{StringFormatOfRTBSpendRequest}}</p>
+                </div>
+    
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Ok</button>
+                </div>
+            </div>
+        </div>
+    </div>

@@ -1,0 +1,7 @@
+{
+    "BusinessUnits":[
+        {"Id":"GroupIT","Name":"Group IT"},
+        {"Id":"Software2","Name":"Software2"},
+        {"Id":"Software3","Name":"Software3"}
+    ]
+}

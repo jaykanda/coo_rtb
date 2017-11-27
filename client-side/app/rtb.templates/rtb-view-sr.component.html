@@ -1,0 +1,189 @@
+<div id="page-content-wrapper">
+        <div class="container-fluid">
+            <!--<div class="row">&nbsp;</div>-->
+            <div class="row">
+                <div class="col-lg-12">
+                    
+                    <nav class="breadcrumb">
+                        <a routerLink="/dashboard" class="btn btn-success">Back</a> 
+                        <a class="breadcrumb-item" routerLink="/">Home</a>
+                        <a class="breadcrumb-item" routerLink="/spendingrequests">Spending Request</a>                        
+                        <a class="breadcrumb-item active" routerLink="#">{{pageHeading}}</a>                
+                    </nav>
+                </div>
+                </div>
+                <div class="row">
+                  <div class="col-lg-12">
+                    <h3 class="page-header">
+                      Spend Request #{{userSRData.RequestTitle}}
+                    </h3>
+                </div>
+                </div>               
+         
+
+            <div class="row">
+            
+            <div id="" class="col-lg-9">
+                    <div class="panel panel-primary">
+                                <div class="panel-heading">
+                                                <div class="panel-title">
+                                                  Request Details                                                                
+                                                </div>                                 
+                                            </div>
+                            <div class="panel-body">  
+                    <div class="row">
+                            
+                            <div class="col-lg-12">
+                                    <div class="form-group">
+                                        <label for="exampleInputEmail1">Background</label>
+                                        
+                                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean euismod bibendum laoreet. Proin gravida dolor sit amet lacus accumsan et viverra justo commodo. Proin sodales pulvinar tempor. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Nam fermentum, nulla luctus pharetra vulputate.</p>
+                                      </div>
+                                </div>
+                              </div>
+                              <div role="col-lg-12 separator" class="divider"></div>
+                              <div class="row">
+                            <div class="col-lg-12"><div class="form-group">
+                                        <label for="exampleInputEmail1">Executive Summary</label>                                        
+                                        <p>{{userSRData.FinancialSummary}}</p>                                        
+                                      </div>
+                            </div>
+                            </div>
+                             <div role="col-lg-12 separator" class="divider"></div>
+                             <div class="row">
+                             <div class="col-lg-3">
+                                <div class="form-group">
+                                <label for="exampleInputEmail1">Description</label>
+                                </div>
+                            </div>
+                            <div class="col-lg-3">
+                                <div class="form-group">
+                                    <label >Category</label>
+                                </div>
+                            </div>
+                            <div class="col-lg-2">
+                                <div class="form-group">
+                                        <label >Start Date</label>
+                                </div>
+                            </div>
+                            <div class="col-lg-2">
+                                <div class="form-group">
+                                        <label >End Date</label>
+                                </div>
+                            </div>
+                            <div class="col-lg-2">
+                                <div class="form-group">
+                                        <label >Costs</label>
+                                </div>
+                            </div>
+                          </div>
+                            <div class="row" *ngFor="let itemDetail of userSRData.ItemDetails">
+                                 <div class="col-lg-3">
+                                    <div class="form-group"> 
+                                        <p>{{itemDetail.Description}}</p></div>
+                                      </div>
+                                      <div class="col-lg-3">
+                                          <div class="form-group">
+                                             <p>{{itemDetail.Category.Name}}</p>
+                                          </div>
+                                      </div>
+                                      <div class="col-lg-2">
+                                                <div class="form-group">
+                                                        <p>{{itemDetail.StartDate}}</p>
+                                                      </div>
+                                                </div>
+                                                <div class="col-lg-2">
+                                                  <div class="form-group">
+                                                          <p>{{itemDetail.EndDate}}</p>
+                                                        </div>
+                                                  </div>
+                                                  <div class="col-lg-2">
+                                                    <div class="form-group">
+                                                        
+                                                            <p>{{itemDetail.Costs | currency:'GBP' : true }}</p>
+                                                          </div>
+                                                    </div>
+                                        
+                                
+                                    </div>
+                                    <div role="col-lg-12 separator" class="divider"></div>
+                                    <div class="row">
+                                       <div class="col-lg-11">
+                                          <span class="pull-right">{{userSRData.TotalSpendAmount | currency:'GBP' : true }}</span>
+                                          <span class="pull-right">Total Cost &nbsp;&nbsp;</span>
+
+                                       </div>
+                                    </div>
+                </div>
+                <div class="panel-footer">
+                   <div class="row">
+                     <div class="col-lg-12 text-center"><a routerLink="#"><strong>View More</strong></a ></div>
+                    </div>
+                  </div>
+        </div> 
+            </div>
+            <div class="col-lg-3 right-panel">
+                        <div class="panel panel-default">
+                                        <div class="panel-body">
+                                            <div class="row">
+                                                <div class="col-lg-6">
+                                                    <div class="form-group">
+                                                        <label for="exampleInputEmail1">Division</label>
+                                                        <p>{{divisionName}}</p>
+                                                      </div>
+                                                      <div role="col-lg-12 separator" class="divider"></div>
+                                                      <div class="form-group">
+                                                          <label for="exampleInputEmail1">Account Executive</label>
+                                                          <p>{{accExecName}}</p>
+                                                        </div>
+                                                        <div role="col-lg-12 separator" class="divider"></div>
+                                                        <div class="form-group">
+                                                            <label for="exampleInputEmail1">MPL</label>
+                                                            <p>MPL</p>
+                                                          </div>
+                                                          <div role="col-lg-12 separator" class="divider"></div>
+                                                          <div class="form-group">
+                                                              <label for="exampleInputEmail1">Total Project Costs</label>
+                                                              <p>{{userSRData.TotalSpendAmount | currency:'GBP' : true}}</p>
+                                                            </div>
+                                                            <div role="col-lg-12 separator" class="divider"></div>
+                                                            <div class="form-group">
+                                                                <label for="exampleInputEmail1">Funding Requested</label>
+                                                                <p>{{userSRData.TotalSpendAmount | currency:'GBP' : true}}</p>
+                                                              </div>
+                                                              
+                                                </div>
+                                                <div class="col-lg-6">
+
+                                                    <div class="form-group">
+                                                        <label for="exampleInputEmail1">Initiative Name</label>
+                                                        <p>{{userSRData.RequestTitle}}</p>
+                                                      </div>
+                                                      <div role="col-lg-12 separator" class="divider"></div>
+                                                      <div class="form-group">
+                                                          <label for="exampleInputEmail1">Category</label>
+                                                          <p>Change</p>
+                                                        </div>
+                                                        <div role="col-lg-12 separator" class="divider"></div>
+                                                        <div class="form-group">
+                                                            <label for="exampleInputEmail1">PRN</label>
+                                                            <p>FT007</p>
+                                                          </div>
+                                                          <div role="col-lg-12 separator" class="divider"></div>
+                                                          <div class="form-group">
+                                                              <label for="exampleInputEmail1">Total Benefits</label>
+                                                              <p>Nil</p>
+                                                            </div>
+                                                            <div role="col-lg-12 separator" class="divider"></div>
+                                                </div>
+                                            </div>
+                                            <div role="col-lg-12 separator" class="divider"></div>
+                                </div>
+                        </div>
+                               
+        </div>
+       
+        </div>
+        </div>
+</div>
+<!-- above code for new business case-->

@@ -1,0 +1,8 @@
+{
+    "AMIPartners":[
+        {"Id":"Partner","Name":"Partner"},
+        {"Id":"Partner2","Name":"Partner2"},
+        {"Id":"Partner3","Name":"Partner3"},
+        {"Id":"Partner4","Name":"Partner4"}
+    ]
+}

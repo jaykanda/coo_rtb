@@ -1,0 +1,7 @@
+{
+    "ItemCategories":[
+        {"Id":"SW","Name":"Software"},
+        {"Id":"HW","Name":"Hardware"},
+        {"Id":"RS","Name":"Resource"}       
+    ]
+}

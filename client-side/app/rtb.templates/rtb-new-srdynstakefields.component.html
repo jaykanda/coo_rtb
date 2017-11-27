@@ -1,0 +1,41 @@
+<div [formGroup]="dynStakeholderFormsection">
+    <div class="clearfix"></div>
+    <div class="col-lg-3">
+        <div class="form-group">
+            <label>Description</label>
+            <span *ngIf='newRequestFlag' class="tool-tip-holder" tooltip content='Hi How are you' showOnClick="true">i</span>
+            <input *ngIf='newRequestFlag' type="text" class="form-control" placeholder="Request Title" />
+            <p *ngIf='!newRequestFlag'>Software license</p>
+        </div>
+        <!-- formControlName="dynDesc_{{dynStakefields}}" ngClass="displayFieldCss('dynDesc_{{dynStakefields}}')" /> -->
+    </div>
+    <div class="col-lg-3">
+        <div class="form-group">
+            <label>Category</label>
+            <input *ngIf='newRequestFlag' type="text" class="form-control"  placeholder="Request Title"/>
+            <p *ngIf='!newRequestFlag'>Software</p>
+        </div>
+    </div>
+    <div class="col-lg-2">
+        <div class="form-group">
+            <label>Start Date</label>
+            <input *ngIf='newRequestFlag' type="date" class="form-control"  placeholder="Request Title" />
+             <p *ngIf='!newRequestFlag'>01/01/2018</p>
+        </div>
+    </div>
+    <div class="col-lg-2">
+        <div class="form-group">
+            <label>End Date</label>
+            <input *ngIf='newRequestFlag' type="date" class="form-control"  placeholder="Request Title" />
+            <p *ngIf='!newRequestFlag'>31/12/2018</p>
+        </div>
+    </div>
+    <div class="col-lg-2">
+        <div class="form-group">
+            <label>Costs</label><a (click)="deleteRow(dynStakefields)" class="plusminusButton"><span class="glyphicon-minus"></span></a>
+            <input *ngIf='newRequestFlag' type="text" class="form-control"  placeholder="Request Title"/>
+            <p *ngIf='!newRequestFlag'>£45,000</p>
+        </div>
+    
+    </div>
+</div>

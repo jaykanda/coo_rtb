@@ -1,0 +1,363 @@
+@font-face {
+  font-family: 'Avenir Next Regular';
+  src: url("../fonts/AvenirNextLTPro-Regular.otf"); /* File to be stored at your site */
+  }
+  @font-face {
+  font-family: 'Avenir Next Bold';
+  src: url("../fonts/AvenirNextLTPro-Bold.otf"); /* File to be stored at your site */
+  }
+  @font-face {
+  font-family: 'Avenir Next Demi';
+  src: url("../fonts/AvenirNextLTPro-Demi.otf"); /* File to be stored at your site */
+  }
+    @font-face {
+  font-family: 'Avenir Next Medium';
+  src: url("../fonts/AvenirNextLTPro-MediumCn.otf"); /* File to be stored at your site */
+  }
+body{
+    background: #F5FAF7;
+    color:#333;
+    font-family: 'Avenir Next Regular';
+}
+#newBusinessForm{
+    background: #fff;
+    color:#A9A9A9;
+    padding:40px;
+}
+button.btn-default{
+    color:#A9A9A9;
+}
+.notification-circle{
+    width: 22px;
+    background: #5fb000;
+    height: 22px;
+    border-radius: 22px;
+    margin-top: -5px;
+    color:#fff;
+    font-weight: bold;
+}
+.actionbox{position: fixed;right:0;}
+a[aria-expanded='false'] .glyphicon-minus{
+    display: none;
+}
+a[aria-expanded='true'] .glyphicon-plus{
+    display: none;
+}
+#sidebar-wrapper .fa{
+    display: inline;
+}
+.bank_type{
+    border-radius: 22px;
+}
+.navbar-default{
+    background: #fff;
+}
+.navbar-header {
+    margin-top: 15px;
+}
+.navbar-header .btn-default{
+    margin: 5px;
+    background: #fff;
+    border: none;
+    box-shadow: none;
+}
+
+.list-group li:hover{
+    background: #e6e6e6;
+}
+#sidebar-wrapper{
+    background: #2E8B57 !important;
+}
+#sidebar-wrapper a {
+    color:#fff;
+}
+#sidebar-wrapper a:hover {
+    font-weight: normal;
+}
+#sidebar-wrapper a:hover span{
+    color:#fff;
+}
+#sidebar-wrapper a span{
+    color:#fff;
+}
+table#spendrequest {
+  background: #fff;
+}
+
+table#spendrequest thead{
+    background: #2E8B57;
+    color:#fff;
+    font-size: 16pt/20pt;
+}
+table#spendrequest thead th{
+    font-size: 16pt/20pt;
+    font-weight: normal;
+    color: #fff;
+}
+table#spendrequest thead th:hover{
+    font-size: 16pt/20pt;
+    font-weight: normal;
+    color: #fff;
+}
+
+
+.glyphicon.glyphicon-menu-hamburger{
+    font-size: 21px;
+    font-weight: lighter;
+    color: #00864F;
+}
+.status-list .status-content{
+    padding: 10px 0px;
+}
+#search,#statusdropdown,.newrequest,.actionselected,.searchconent{
+    margin:5px 0px;
+}
+#statusdropdown button{
+    background: #fff;
+}
+.nav-pills{
+    background: #fff;
+}
+.nav-pills>li.active>a, .nav-pills>li.active>a:focus, .nav-pills>li.active>a:hover{
+    background: #2E8B57;
+}
+.nav>li>a:focus, .nav>li>a:hover{
+    background: #2E8B57;
+    color: #fff;
+}
+.nav-pills>li>a{
+   color:#333;   
+}
+
+#newBusinessForm .input-group-btn{
+    vertical-align: bottom;
+}
+#newBusinessForm .input-group-btn button{
+    background: #fff;
+}
+.groupingContent
+{
+  padding:10px;
+  border: 1px solid #A9A9A9;
+}
+.divider {
+    height: 1px;
+    margin: 9px 0;
+    overflow: hidden;
+    border-top:1px solid #e5e5e5;
+    padding: 10px 0;
+}
+.dropdown-menu:before {
+  position: absolute;
+  top: -7px;
+  right: 9px;
+  display: inline-block;
+  border-right: 7px solid transparent;
+  border-bottom: 7px solid #ccc;
+  border-left: 7px solid transparent;
+  border-bottom-color: rgba(0, 0, 0, 0.2);
+  content: '';
+}
+
+.dropdown-menu:after {
+  position: absolute;
+  top: -6px;
+  right: 10px;
+  display: inline-block;
+  border-right: 6px solid transparent;
+  border-bottom: 6px solid #ffffff;
+  border-left: 6px solid transparent;
+  content: '';
+}
+
+.btn.btn-default{color: black}
+.btn.btn-link{color:white;font-weight:bold;text-decoration: underline}
+.vertical-divider{content: "";}
+.panel-heading{font-weight:bolder;}
+.right-panel .divider{padding:0}
+#rtbSpendRequest ul li{cursor: pointer}
+.notificationBar{padding:10px 0}
+.notificationBar :active{background-color: none}
+.home{color: gray;padding: 15px 0;}
+
+
+#search {
+  height: 35px;
+  color: #333;
+}
+.panel-primary{
+    border: 0;
+}
+.panel-body {
+  border-bottom: 0;
+}
+.panel-title {
+  font-weight: normal;
+  font-size: 16pt/20pt;
+  color: #fff;
+}
+
+.panel-primary .panel-heading{
+border: 0;
+background: #2E8B57;
+border-top: 5px solid #2E8B57;
+color: #fff;
+  font-weight: normal;
+  font-size: 16pt/20pt;
+  padding: 5px 15px;
+}
+.form-group label {
+  font-weight: normal;
+  color: #333;
+  font-size: 16pt/20pt;
+}
+select.form-control {
+  height: 35px;  
+}
+a {
+   color: #006A4D;
+}
+a.actionLinks:link, a.actionLinks:active {
+  font-weight: normal;
+  color: #006A4D;
+  font-size: 16pt/20pt;
+}
+a.actionLinks:hover {
+  font-weight: normal;
+  color: #649C00;
+  font-size: 16pt/20pt;
+}
+.form-control {
+   height: 35px;
+}
+#page-content-wrapper {
+  background: #F5FAF7;
+}
+.tool-tip-holder {
+    padding: 0;
+    color: #fff;
+    font-weight: 800;
+    font-size: 8px;
+    background-color: #999999;
+    -moz-border-radius: 10px;
+    -ms-border-radius: 10px;
+    -webkit-border-radius: 10px;
+    text-align: center;
+    display: inline-block;
+    width: 10px;
+    }
+    a.plusminusButton {
+      font-weight: bold; 
+      font-size: 16px; 
+      text-decoration: none; 
+      cursor: pointer; 
+      float: right; 
+      background-color: #999999;
+      -moz-border-radius: 15px;
+      -ms-border-radius: 15px;
+      -webkit-border-radius: 15px;
+      width: 15px;
+      height: 15px;
+      text-align: center;
+    }
+     a.plusminusButton span {
+      position: relative;
+      top: -3px;
+      color: #fff;
+     }
+     div.statusIndicator-new {
+        background-color: #ff9900;
+        -moz-border-radius: 15px;
+        -ms-border-radius: 15px;
+        -webkit-border-radius: 15px;
+        padding: 2px;
+        width: 15px;
+        height: 15px;
+        font-size: 12px;
+        color: #ff9900;
+        font-weight: bold;  
+        margin-top: 5px;
+        position: relative;
+        top: -15px;
+        left: 30px;      
+     }
+     div.statusIndicator-approved {
+        background-color: #5fb000;
+        -moz-border-radius: 15px;
+        -ms-border-radius: 15px;
+        -webkit-border-radius: 15px;
+        padding: 2px;
+        width: 15px;
+        height: 15px;
+        font-size: 12px;
+        color: #5fb000;
+        font-weight: bold;  
+        margin-top: 5px;
+        position: relative;
+        top: -15px;
+        left: 30px;      
+     }
+     span.glyphicon-ok {
+        color: #5fb000;
+     }
+     a.statusTxt {
+         color: #5fb000;
+         text-decoration: none;
+     }
+     div.tableausection {
+         padding: 100px;
+         color: #868e96;
+         background-color: #ccc;
+     }
+     .tooltip {
+    position: relative;
+    display: inline-block;
+    font-size: 16px;
+}
+a.newRequestbutton {
+    color: #fff;
+    font-size: 16px;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+a.tooltip span.tooltiptext {
+    visibility: hidden;
+    background-color: black;
+    color: #fff;
+    text-align: center;
+    padding: 5px 0;
+    border-radius: 6px;
+     position: absolute;
+     z-index: 1;
+    width: 120px;
+    top: 100%;
+     left: 50%; 
+     margin-left: -60px; 
+    font-size: 12px;
+}
+
+a.tooltip:hover span.tooltiptext {
+    visibility: visible;
+}
+
+/* Form field validation error message styles */
+.has-error {
+  border: 1px solid #d9534f;
+}
+span.errorTxt {
+  color: red;
+  font-size: 12px;
+}
+#page-content-wrapper{
+    margin-top: 62px;
+}
+
+.breadcrumb-item+.breadcrumb-item::before {
+    display: inline-block;
+    padding-right: .5rem;
+    padding-left: .5rem;
+    color: #868e96;
+    content: ">";
+}
+.modal-content{word-break: break-all;}

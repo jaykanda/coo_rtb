@@ -1,0 +1,6 @@
+{
+    "PricingTerms":[
+        {"Id":"FPC","Name":"Fixed Price Contract"},
+        {"Id":"VPC","Name":"Variable Price Contract"}
+    ]
+}

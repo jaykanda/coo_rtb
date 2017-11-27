@@ -1,0 +1,762 @@
+<div id="page-content-wrapper">
+    <div class="container-fluid">
+        
+        <!--<div class="row">&nbsp;</div>-->
+        <div class="row">
+              <div class="col-lg-4">
+
+                <nav class="breadcrumb">
+            <a class="breadcrumb-item" href="/">Home</a>
+            <a class="breadcrumb-item" href="/engagementsr/view">Spending Request</a>
+            <a class="breadcrumb-item active" href="#">New</a>
+    
+          </nav>
+              </div>
+            <div class="col-lg-8">
+                <h3 *ngIf='newRequestFlag' class="page-header">
+                    Review and approve request
+                        </h3>
+                <h3 *ngIf='!newRequestFlag' class="page-header">
+                    Review and approve request
+                        </h3>
+            </div>
+        </div>
+        <form>
+        <div class="row">
+            <div class="col-lg-9">
+                <div class="panel panel-primary">
+                    <div class="panel-heading">
+                        <div class="panel-title">About the spend request</div>
+                    </div>
+                    <div class="panel-body">
+                        <div class="col-lg-5">
+                            <div class="form-group">
+                                <label>Request Title</label>
+                                <p>{{engagementViewData.RequestTitle}}</p>
+                            </div>
+                        </div>
+                        <div class="col-lg-5">
+                            <div class="form-group">
+                                <label for="exampleInputEmail1">Amount to spend</label>
+                                <p>{{amountSpend}}</p>
+                            </div>
+                        </div>
+                        <div class="col-lg-12 divider" role="separator"></div>
+                        <div class="col-lg-12">
+                            <p>Divisional CIO Sponsor
+                                <br/>
+                                <br/>CIO Sponsor is the area requesting the change, product or service and are accountable for the request.</p>
+                        </div>
+                        <div class="col-lg-4">
+                            <div class="form-group">
+                                <label>Division</label>
+                                <p>{{division}}</p> 
+                            </div>
+                        </div>
+                        <div class="col-lg-4">
+                            <div class="form-group">
+                                <label>Business Unit</label>
+                                <p>{{bu}}</p>
+                            </div>
+                        </div>
+                        <div class="col-lg-4">
+                            <div class="form-group">
+                                <label>Head of System/Function</label>
+                                <p>{{hos}}</p>
+                            </div>
+                        </div>
+                        <div role="col-lg-12 separator" class="divider"></div>
+                        <div class="row">
+                          <div class="col-lg-12">
+                              <div class="collapse" id="collapseExample">
+                                  <div class="well">
+                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean euismod bibendum laoreet. Proin gravida dolor sit amet lacus accumsan.
+                               <br/>CIOCIO Firstname Surname at 17:50 on 01/01/2017</p>
+                               <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean euismod bibendum laoreet. Proin gravida dolor sit amet lacus accumsan.
+                                  <br/>AMI Firstname Surname at 18:10 on 01/01/2017</p>
+                                </div>
+                                  <div class="col-lg-12">
+                                      <div class="form-group">
+                                        
+                                          <textarea  class="form-control" rows="4"></textarea>
+                                          <br/>
+                                          <button class="btn btn-default">Add Comment</button>
+                                      </div>
+                                  </div>
+                              </div>
+                          </div>
+                        </div>
+                    </div>
+                    <div class="panel-footer">
+                            <div class="row text-center">
+                              <a class="" role="button" data-toggle="collapse" href="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+                                Add notes
+                              </a>
+                            </div>
+                          </div>
+                </div>
+            </div>
+            <div class="col-lg-3 actionbox" *ngIf='newRequestFlag'>
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                        <button type="button" class="btn btn-danger btn-block" data-toggle="modal" data-target="#myModal">Discard Request</button>
+                        <button type="button" class="btn btn-success btn-block" data-toggle="modal" data-target="#myModalDraft">Save Draft Request</button>
+                        <button type="button" class="btn btn-success btn-block" (click)='reviewRequest();'>Review Request</button>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 actionbox" *ngIf='!newRequestFlag'>
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                        <div class="">
+                            <h4>Engagement Checks</h4>
+                            <ul class="list-group" *ngIf="spendType !== 'IT services / Resource Augmentation'">
+                                <li class="list-group-item"><span class="glyphicon glyphicon-ok" aria-hidden="true"></span> CIO</li>
+                                <li class="list-group-item"><span class="glyphicon glyphicon-ok" aria-hidden="true"></span> IT Finance</li>
+                                <li class="list-group-item"><span class="glyphicon glyphicon-ok" aria-hidden="true"></span> IT Sourcing</li>
+                                <li class="list-group-item"><span class="glyphicon glyphicon-ok" aria-hidden="true"></span> AMI</li>
+                                <li class="list-group-item"><span class="glyphicon glyphicon-ok" aria-hidden="true"></span> ITAM</li>
+                            </ul>
+                            <ul class="list-group" *ngIf="spendType === 'IT services / Resource Augmentation'">
+                                <li class="list-group-item"><span class="glyphicon glyphicon-ok" aria-hidden="true"></span> CIO</li>
+                                <li class="list-group-item"><span class="glyphicon glyphicon-ok" aria-hidden="true"></span> IT Finance</li>
+                                <li class="list-group-item"><span class="glyphicon glyphicon-ok" aria-hidden="true"></span> IT Sourcing</li>
+                                <li class="list-group-item disabled"><span class="glyphicon" aria-hidden="true"></span> AMI</li>
+                                <li class="list-group-item disabled"><span class="glyphicon" aria-hidden="true"></span> ITAM</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                        <button type="button" class="btn btn-default btn-block" data-toggle="modal" data-target="#myModal">Export Request</button>
+                        <button type="button" class="btn btn-success btn-block" data-toggle="modal" data-target="#myModalDraft">Send for Rework</button>
+                        <button type="button" class="btn btn-success btn-block" (click)="approveRequest()">Approve Request</button>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-9">
+                <div class="panel panel-primary">
+                    <div class="panel-heading">
+                        <div class="panel-title">Request stakeholder contact details</div>
+                    </div>
+                    <div class="panel-body">
+                        <div class="row">
+                                <div class="col-lg-4">
+                                        <div class="form-group">
+                                            <label>Requestor Name</label>
+                                            <p>{{requestorName}}</p>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-4">
+                                        <div class="form-group">
+                                            <label>Requestor Email</label>
+                                            <p>{{requestorEmail}}</p>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-4">
+                                        <div class="form-group">
+                                            <label>Requestor Contact Number</label>
+                                            <p>{{requestorContNumber}}</p>
+                                        </div>
+                                    </div>
+                        </div>
+                        <div class="row">
+                                <div class="col-lg-4" *ngIf="amiPartner !== ''">
+                                        <div class="form-group">
+                                            <label>AMI Partner Engaged</label>
+                                            <p>{{amiPartner}}</p>
+                                        </div>
+                                    </div>
+                                   
+                                    <div class="col-lg-4" *ngIf="CIOEngaged !== ''">
+                                        <div class="form-group">
+                                            <label>CIO Contact Engaged</label>
+                                            <p>{{CIOEngaged}}</p>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-4" *ngIf="tacPresenter !== ''">
+                                        <div class="form-group">
+                                            <label>TAC Presenter</label>
+                                            <p>{{tacPresenter}}</p>
+                                        </div>
+                                    </div>
+                        </div>
+                        <div class="row">
+                                <div class="col-lg-4" *ngIf="tagPresenter !== ''">
+                                        <div class="form-group">
+                                            <label>Technology Acquisition Gate Presenter</label>
+                                            <p>{{tagPresenter}}</p>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-4" *ngIf="gcmcPresenter !== ''">
+                                        <div class="form-group">
+                                            <label>GCMC Presenter</label>
+                                            <p>{{gcmcPresenter}}</p>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-4" *ngIf="costForumPresenter !== ''">
+                                        <div class="form-group">
+                                            <label>Cost Forum Presenter</label>
+                                            <p>{{costForumPresenter}}</p>
+                                        </div>
+                                    </div>
+                        </div>
+                       
+
+                        <div class="col-lg-12">
+                            <p>The fields below are reviewed by CMU Executives to make an approval decision. To gain a quick approval please make sure appropriate information and relevant justification is included, using language appropriate for an executive audience.
+                            </p>
+                        </div>
+                        <div class="col-lg-12">
+                            <p>Executive Summary
+                                <br/>
+                                <br/>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean euismod bibendum laoreet. Proin gravida dolor sit amet lacus accumsan et viverra justo commodo. Proin sodales pulvinar tempor. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Nam fermentum, nulla luctus pharetra vulputate.</p>
+                        </div>
+                        <div class="col-lg-12">
+                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean euismod bibendum laoreet. Proin gravida dolor sit amet lacus accumsan et viverra justo commodo. Proin sodales pulvinar tempor. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Nam fermentum, nulla luctus pharetra vulputate.
+                            </p>
+                        </div>
+                        <div class="col-lg-12">
+                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean euismod bibendum laoreet. Proin gravida dolor sit amet lacus accumsan et viverra justo commodo.
+                            </p>
+                        </div>
+
+                        <div role="col-lg-12 separator" class="divider"></div>
+                        <div class="row">
+                        <div class="col-lg-3">
+                           <div class="form-group">
+                           <label for="exampleInputEmail1">Description</label>
+                           </div>
+                       </div>
+                       <div class="col-lg-3">
+                           <div class="form-group">
+                               <label >Category</label>
+                           </div>
+                       </div>
+                       <div class="col-lg-2">
+                           <div class="form-group">
+                                   <label >Start Date</label>
+                           </div>
+                       </div>
+                       <div class="col-lg-2">
+                           <div class="form-group">
+                                   <label >End Date</label>
+                           </div>
+                       </div>
+                       <div class="col-lg-2">
+                           <div class="form-group">
+                                   <label >Costs</label>
+                           </div>
+                       </div>
+                     </div>
+                     <div class="row" *ngFor="let itemDetail of engagementViewData.ItemDetails">
+                        <div class="col-lg-3">
+                           <div class="form-group"> 
+                               <p>{{itemDetail.Description}}</p></div>
+                             </div>
+                             <div class="col-lg-3">
+                                 <div class="form-group">
+                                    <p>{{itemDetail.Category.Name}}</p>
+                                 </div>
+                             </div>
+                             <div class="col-lg-2">
+                                       <div class="form-group">
+                                               <p>{{itemDetail.StartDate}}</p>
+                                             </div>
+                                       </div>
+                                       <div class="col-lg-2">
+                                         <div class="form-group">
+                                                 <p>{{itemDetail.EndDate}}</p>
+                                               </div>
+                                         </div>
+                                         <div class="col-lg-2">
+                                           <div class="form-group">
+                                               
+                                                   <p>{{itemDetail.Costs | currency:'GBP' : true }}</p>
+                                                 </div>
+                                           </div>                              
+                       
+                           </div>
+                           <div role="col-lg-12 separator" class="divider"></div>
+                           <div class="row">
+                              <div class="col-lg-11">
+                                 <span class="pull-right">{{engagementViewData.Vat}}</span>
+                                 <span class="pull-right">VAT @ 10% &nbsp;&nbsp;</span>
+
+                              </div>
+                           </div>
+                           <div role="col-lg-12 separator" class="divider"></div>
+                           <div class="row">
+                              <div class="col-lg-11">
+                                 <span class="pull-right">{{engagementViewData.TotalSpendAmount | currency:'GBP' : true }}</span>
+                                 <span class="pull-right">Total Cost &nbsp;&nbsp;</span>
+                              </div>
+                           </div>
+                           <div role="col-lg-12 separator" class="divider"></div>
+                           <div class="col-lg-12" (click)="tableauOn();">
+                            <div class="form-group" >
+                                <label>Financial Portfolio: </label>   
+                                    <iframe frameborder="0" marginheight="0" marginwidth="0" title="data visualization" allowtransparency="true" allowfullscreen="true" class="tableauViz" width="900" height="200" style="display: block; margin: 0px; padding: 0px; border: none;" src="http://52.236.161.147/views/PoC/Graph?:embed=y&:showAppBanner=false&:showShareOptions=true&:display_count=no&:showVizHome=no&:tabs=no&:toolbar=no#19"></iframe>
+                            </div> 
+                        </div>
+                        <div class="col-lg-12">
+                                <div role="col-lg-12 separator" class="divider"></div>
+                                <div class="form-group">
+                                    <label>What is this hardware and what is it used for: </label>                                    
+                                    <p>{{engagementViewData.ItemQuestion1}}</p>
+                                </div>
+                            </div>
+                            <div class="col-lg-12">
+                                <div class="form-group">
+                                    <label>As a result of this purchase are we decommissioning any existing software and are there any associated support savings:</label>
+                                    <p>{{engagementViewData.ItemQuestion2}}</p>
+                                </div>
+                            </div>
+                            <div class="col-lg-12">
+                                <div class="form-group">
+                                    <label>Confirm which area will own and support this hardware:</label>
+                                    <p>{{engagementViewData.ItemQuestion3}}</p>
+                                </div>
+                            </div>
+                            <div class="col-lg-12">
+                                <div class="form-group">
+                                    <label>Justify choice of supplier:</label>
+                                    <p>{{engagementViewData.ItemQuestion4}}</p>
+                                </div>
+                            </div>
+                            <div class="col-lg-12">
+                                <div class="form-group">
+                                    <label>If your spend contains licenses please state whether these are term subscription or perpetual licences and justify the position:</label>
+                                    <p>{{engagementViewData.ItemQuestion5}}</p>
+                                </div>
+                            </div>
+                            <div role="col-lg-12 separator" class="divider"></div>
+                            <div class="row">
+                              <div class="col-lg-12">
+                                  <div class="collapse" id="collapseExample2">
+                                      <div class="well">
+                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean euismod bibendum laoreet. Proin gravida dolor sit amet lacus accumsan.
+                                   <br/>CIOCIO Firstname Surname at 17:50 on 01/01/2017</p>
+                                   <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean euismod bibendum laoreet. Proin gravida dolor sit amet lacus accumsan.
+                                      <br/>AMI Firstname Surname at 18:10 on 01/01/2017</p>
+                                    </div>
+                                      <div class="col-lg-12">
+                                          <div class="form-group">
+
+                                              <textarea class="form-control" rows="4"></textarea>
+                                              <br />
+                                              <button class="btn btn-default">Add Comment</button>
+                                          </div>
+                                      </div>
+                                  </div>
+                              </div>
+                            </div>
+                    </div>
+                    <div class="panel-footer">
+                            <div class="row text-center">
+                              <a class="" role="button" data-toggle="collapse" href="#collapseExample2" aria-expanded="false" aria-controls="collapseExample2">
+                                Add notes
+                              </a>
+                            </div>
+                          </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-9">
+                <div class="panel panel-primary">
+                    <div class="panel-heading">
+                        <div class="panel-title">Sourcing</div>
+                    </div>
+                    <div class="panel-body">
+                            <div class="row">
+                                    <div class="col-lg-6">
+                                            <div class="form-group">
+                                                <label>Sourcing Contact Engaged</label>
+                                                <p>{{srcContactEng}}</p>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <div class="form-group">
+                                                <label>Spend Type </label>
+                                                <p>{{spendType}}</p>
+                                            </div>
+                                        </div>
+                            </div>
+                            <div class="row">
+                                    <div class="col-lg-6">
+                                            <div class="form-group">
+                                                <label>Pricing Terms</label>
+                                                <p>{{pricingTerms}}</p>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <div class="form-group">
+                                                <label>Buying Online Supplier</label>
+                                                <p>{{buyOnlineSupplier}}</p>
+                                            </div>
+                                        </div>
+                            </div>
+                            <div class="row">
+                                    <div class="col-lg-6">
+                                            <div class="form-group">
+                                                <label>Manufacturer (if different to Supplier)e</label>
+                                                <p>{{engagementViewData.Manufacturer}}</p>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <div class="form-group">
+                                                <label>Cost % for Annual Maintenance & Support</label>
+                                                <p>{{engagementViewData.AMC}}</p>
+                                                <span>Should be 18% or lower for 24x7 support (leave blank if N/A)</span>
+                                            </div>
+                                        </div>
+                            </div>
+                        <div role="col-lg-12 separator" class="divider"></div>
+                        <div class="col-lg-12">
+                                <p>Does this request include an element of RPI?</p>
+                                <div>{{engagementViewData.RPIQuestion}}</div>
+                            </div>
+                            <div class="col-lg-12">
+                                <p>Is there a clause allowing third party ownership of Intellectual Property Rights where development work has been funded by LBG?</p>
+                                <div>{{engagementViewData.LBGQuestion}}</div>
+                            </div>
+                            <div class="col-lg-12">
+                                <p>Is this for a Tier A application? If so does the supplier adhere to necessary service levels? If it is not a Tier A application please enter N/A</p>
+                                <div>{{engagementViewData.TierAQuestion}}</div>                         
+                            </div>
+    
+                            <div role="col-lg-12 separator" class="divider"></div>
+                            <div class="row">
+                              <div class="col-lg-12">
+                                  <div class="collapse" id="collapseExample3">
+                                      <div class="well">
+                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean euismod bibendum laoreet. Proin gravida dolor sit amet lacus accumsan.
+                                   <br/>CIOCIO Firstname Surname at 17:50 on 01/01/2017</p>
+                                   <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean euismod bibendum laoreet. Proin gravida dolor sit amet lacus accumsan.
+                                      <br/>AMI Firstname Surname at 18:10 on 01/01/2017</p>
+                                    </div>
+                                      <div class="col-lg-12">
+                                          <div class="form-group">
+
+                                              <textarea class="form-control" rows="4"></textarea>
+                                              <br />
+                                              <button class="btn btn-default">Add Comment</button>
+                                          </div>
+                                      </div>
+                                  </div>
+                              </div>
+                            </div>
+                    </div>
+                    <div class="panel-footer">
+                            <div class="row text-center">
+                              <a class="" role="button" data-toggle="collapse" href="#collapseExample3" aria-expanded="false" aria-controls="collapseExample3">
+                                Add notes
+                              </a>
+                            </div>
+                          </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-9">
+                <div class="panel panel-primary">
+                    <div class="panel-heading">
+                        <div class="panel-title">
+                            Finance
+                        </div>
+                    </div>
+                    <div class="panel-body">
+                        <div class="row">
+                                <div class="col-lg-6">
+                                        <div class="form-group">
+                                            <label>Finance Contact Engaged</label>
+                                            <p>{{financeConEngaged}}</p>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="form-group">
+                                            <label>Project Name</label>
+                                            <p>{{projectName}}</p>
+                                        </div>
+                                    </div>    
+                        </div> 
+                        <div class="row">
+                                <div class="col-lg-6">
+                                        <div class="form-group">
+                                            <label>Programme Title</label>
+                                            <p>{{engagementViewData.ProgrammeTitle}}</p>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="form-group">
+                                            <label>Budget Type</label>
+                                            <p>{{engagementViewData.BudgetType}}</p>
+                                        </div>
+                                    </div>
+                        
+                        </div>                       
+                        <div class="row">
+                                <div class="col-lg-6">
+                                        <div class="form-group">
+                                            <label>Budget Subtype</label>
+                                            <p>{{engagementViewData.BudgetSubtype}}</p>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="form-group">
+                                            <label>Cost Centre</label>
+                                            <p>{{engagementViewData.CostCentre}}</p>
+                                        </div>
+                                    </div>
+                        </div>
+                        <div class="row">
+                                <div class="col-lg-6">
+                                        <div class="form-group">
+                                            <label>PRN</label>
+                                            <p>{{engagementViewData.PRN}}</p>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="form-group">
+                                            <label>Spend GL Code (list)</label>
+                                            <p>{{engagementViewData.SpendGLCode}}</p>
+                                        </div>
+                                    </div>
+                        </div>
+                        <div class="row">
+                                <div class="col-lg-6">
+                                        <div class="form-group">
+                                            <label>WBS validation Check</label>
+                                            <p>{{engagementViewData.WBSValidationCheck}}</p>
+                                        </div>
+                                    </div>
+                        </div>
+                        <div class="col-lg-12">
+                                <p>Does this contract cover systems and services that is included in a divestment programme?
+                                <span *ngIf='!newRequestFlag'>Yes</span></p>
+                                </div>
+
+
+                        <div role="col-lg-12 separator" class="divider"></div>
+                        <div class="col-lg-12">
+                            <p>Supply Area
+                                <br/>
+                                <br/>The supply area owns, or will own the ongoing costs associated with this spend (BAU budget) or provides the service to the Divisional CIO sponsor.
+                            </p>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="form-group">
+                                <label>Area</label>
+                                <p *ngIf='!newRequestFlag'>Group Operations / Group IT / Infrastructure Tech Service / Infrastructure Projects</p>
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="form-group">
+                                <label>Head of System/Function</label>
+                                <p></p>
+                            </div>
+                        </div>
+                        <div role="col-lg-12 separator" class="divider"></div>
+                        <div class="row">
+                          <div class="col-lg-12">
+                              <div class="collapse" id="collapseExample4">
+                                  <div class="well">
+                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean euismod bibendum laoreet. Proin gravida dolor sit amet lacus accumsan.
+                               <br/>CIOCIO Firstname Surname at 17:50 on 01/01/2017</p>
+                               <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean euismod bibendum laoreet. Proin gravida dolor sit amet lacus accumsan.
+                                  <br/>AMI Firstname Surname at 18:10 on 01/01/2017</p>
+                                </div>
+                                  <div class="col-lg-12">
+                                      <div class="form-group">
+
+                                          <textarea class="form-control" rows="4"></textarea>
+                                          <br />
+                                          <button class="btn btn-default">Add Comment</button>
+                                      </div>
+                                  </div>
+                              </div>
+                          </div>
+                        </div>
+                    </div>
+                    <div class="panel-footer">
+                            <div class="row text-center">
+                              <a class="" role="button" data-toggle="collapse" href="#collapseExample4" aria-expanded="false" aria-controls="collapseExample4">
+                                Add notes
+                              </a>
+                            </div>
+                          </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-9">
+                <div class="panel panel-primary">
+                    <div class="panel-heading">
+                        <div class="panel-title">Financial Information </div>
+                    </div>
+                    <div class="panel-body">
+                        <div class="col-lg-12">
+                                <div class="row">
+                                        <div class="col-lg-1">
+                                            &nbsp;
+                                            </div>
+                                        <div class="col-lg-2">
+                                           <div class="form-group">
+                                           <label for="exampleInputEmail1">Year</label>
+                                           </div>
+                                       </div>
+                                       <div class="col-lg-2">
+                                           <div class="form-group">
+                                               <label >Budget</label>
+                                           </div>
+                                       </div>
+                                       <div class="col-lg-2">
+                                           <div class="form-group">
+                                                   <label >Forecast/Actual</label>
+                                           </div>
+                                       </div>
+                                       <div class="col-lg-2">
+                                           <div class="form-group">
+                                                   <label >Threat Benefit</label>
+                                           </div>
+                                       </div>
+                                       <div class="col-lg-2">
+                                           <div class="form-group">
+                                                   <label >Opportunity Identified</label>
+                                           </div>
+                                       </div>
+                                     </div>
+                                       <div class="row" *ngFor="let itemDetail of engagementViewData.FinancialInformation">
+                                            <div class="col-lg-1">
+                                                    &nbsp;
+                                                    </div>    
+                                            <div class="col-lg-2">
+                                               <div class="form-group"> 
+                                                   <p>{{itemDetail.Year}}</p></div>
+                                                 </div>
+                                                 <div class="col-lg-2">
+                                                     <div class="form-group">
+                                                        <p>{{itemDetail.Budget}}</p>
+                                                     </div>
+                                                 </div>
+                                                 <div class="col-lg-2">
+                                                           <div class="form-group">
+                                                                   <p>{{itemDetail.Forecast}}</p>
+                                                                 </div>
+                                                           </div>
+                                                           <div class="col-lg-2">
+                                                             <div class="form-group">
+                                                                     <p>{{itemDetail.Threat}}</p>
+                                                                   </div>
+                                                             </div>
+                                                             <div class="col-lg-2">
+                                                               <div class="form-group">                                                                   
+                                                                    <p>{{itemDetail.Opportunity}}</p>
+                                                                     </div>
+                                                               </div>
+                                                   
+                                           
+                                               </div>
+                        </div>
+
+                        <div class="col-lg-12">
+                                <div class="form-group">
+                                    <label>Financial Summary</label>
+                                    <p>{{engagementViewData.FinancialSummary}}</p>
+                                </div>
+                        </div>       
+                        <div role="col-lg-12 separator" class="divider"></div>
+                            <div class="row">
+                              <div class="col-lg-12">
+                                  <div class="collapse" id="collapseExample5">
+                                      <div class="well">
+                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean euismod bibendum laoreet. Proin gravida dolor sit amet lacus accumsan.
+                                   <br/>CIOCIO Firstname Surname at 17:50 on 01/01/2017</p>
+                                   <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean euismod bibendum laoreet. Proin gravida dolor sit amet lacus accumsan.
+                                      <br/>AMI Firstname Surname at 18:10 on 01/01/2017</p>
+                                    </div>
+                                      <div class="col-lg-12">
+                                          <div class="form-group">
+
+                                              <textarea class="form-control" rows="4"></textarea>
+                                              <br />
+                                              <button class="btn btn-default">Add Comment</button>
+                                          </div>
+                                      </div>
+                                  </div>
+                              </div>
+                            </div>
+                    </div>
+                    <div class="panel-footer">
+                            <div class="row text-center">
+                              <a class="" role="button" data-toggle="collapse" href="#collapseExample5" aria-expanded="false" aria-controls="collapseExample5">
+                                Add notes
+                              </a>
+                            </div>
+                          </div>
+                </div>
+            </div>
+        </div>
+        </form>
+    </div>
+</div>
+
+<!-- above code for new business case-->
+<!-- Modal To Confirm-->
+<div class="modal fade bs-example-modal-sm" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+<div class="modal-dialog" role="document">
+    <div class="modal-content">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title" id="myModalLabel">Select Format to Export file</h4>
+        </div>
+
+        <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+            <button type="button" class="btn btn-success" data-dismiss="modal">Powerpoint</button>
+            <button type="button" class="btn btn-success" data-dismiss="modal" (click)="exportPDF();">Pdf</button>
+
+        </div>
+    </div>
+
+</div>
+</div>
+<!-- Modal To Draft-->
+<div class="modal fade bs-example-modal-sm" id="myModalDraft" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+<div class="modal-dialog" role="document">
+    <div class="modal-content">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title" id="myModalLabel">Are you sure you want to send this request for rework?</h4>
+        </div>
+
+        <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">No</button>
+            <a (click)='saveRequestAsDraft();' href="/spendingrequests" type="button" class="btn btn-success btn-sm">Send for Rework</a>
+        </div>
+    </div>
+
+</div>
+</div>
+
+<!-- Modal To Submit Data-->
+<div class="modal fade bs-example-modal-sm" id="myModal2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">JSON format data that will be sent to operation layer:</h4>
+                <p>{{StringFormatOfengagementViewData}}</p>
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Ok</button>
+            </div>
+        </div>
+    </div>
+</div>
