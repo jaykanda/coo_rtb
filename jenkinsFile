@@ -1,0 +1,38 @@
+pipeline { 
+    agent any
+    // triggers { pollSCM('H/15 * * * *') }
+
+      stages {
+          stage('CHECKOUT THE CODE') {
+              agent any 
+              steps {
+                checkout([
+                    $class: 'GitSCM',
+                    branches: [[name: "*/master"]], 
+                    //branches: [[name: "*/${branch}"]], 
+                    doGenerateSubmoduleConfigurations: false, 
+                    extensions: [], 
+                    submoduleCfg: [], 
+                    userRemoteConfigs: [
+                        [
+                            url: 'https://github.com/jaykanda/coo_rtb.git'
+                        ]
+                    ]
+                ])
+              }
+          }
+          stage('INSTALL NODE PACKAGES') {
+              agent any
+              steps {
+//                       sh 'cd '
+                       sh 'npm install'
+            }
+          }
+          stage('BUILD APP') {
+              agent any
+              steps {
+                       sh 'npm run buildapp'
+            }
+          }
+      }
+}
