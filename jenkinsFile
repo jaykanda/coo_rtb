@@ -1,10 +1,14 @@
-pipeline { 
-    agent any
+pipeline {
+    agent none
+//node('Building and Deploying the Node APP...') { 
     // triggers { pollSCM('H/15 * * * *') }
-
       stages {
+        //  stage('Initialize') {
+        //     echo 'Initializing...'
+        //     def node = tool name: 'Node-7.4.0', type: 'jenkins.plugins.nodejs.tools.NodeJSInstallation'
+        //     env.PATH = "${node}/bin:${env.PATH}"
+        //   }
           stage('CHECKOUT THE CODE') {
-              agent any 
               steps {
                 checkout([
                     $class: 'GitSCM',
@@ -21,15 +25,13 @@ pipeline {
                 ])
               }
           }
+          
           stage('INSTALL NODE PACKAGES') {
-              agent any
-              steps {
-//                       sh 'cd '
+                steps {
                        sh 'npm install'
-            }
+                }
           }
           stage('BUILD APP') {
-              agent any
               steps {
                        sh 'npm run buildapp'
             }

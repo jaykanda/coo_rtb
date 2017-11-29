@@ -72,7 +72,6 @@ export class RTBEngageviewSRComponent implements OnInit {
         console.log("export PDF data ===>", this.engagementViewData);
         this.id = window.location.pathname.split('/')[window.location.pathname.split('/').length - 1];
         this.service.exportPDFdata(this.id, this.engagementViewData);
-    }
-	
+    }	
 }
 

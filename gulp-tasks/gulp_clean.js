@@ -6,7 +6,7 @@ var fs = require('fs');
 module.exports = cleanBuildFolder;
 function cleanBuildFolder(gulp) {
 	return function() {
-    	del(['./client-side/tmp']);
+    	del.sync(['./client-side/tmp']);
   	};
 }
 

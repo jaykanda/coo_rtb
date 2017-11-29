@@ -16,7 +16,7 @@ gulp.task('gulp_tslint', getTask('gulp_tslint'));
 gulp.task('gulp_systemjs', getTask('gulp_systemjs'));
 gulp.task('gulp_bundleapp', getTask('gulp_bundleapp'));
 
-gulp.task('build_app', ['gulp_clean', 'build_csslib', 'build_appjs', 'build_nodejslib', 'gulp_fonts', 'gulp_tslint'], function() {
+gulp.task('build_app', ['gulp_clean', 'build_csslib', 'build_appjs', 'build_nodejslib', 'gulp_fonts' /*,'gulp_tslint' */], function() {
   //gulp.task('Moving the fonts...', 'gulp_fonts', function(){
     // return gulp.task('');
     console.log('App is built...');
